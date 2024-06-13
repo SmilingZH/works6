@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习六</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* margin: 3px; */
+            /* border: 1px solid black; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: rgb(255, 244, 231);
+            height: 100%;
+            margin: 0;
+            position: relative;
+            top: -10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: scale(.7);
+            overflow: hidden;
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 卡片 */
+        .kp {
+            width: 210px;
+            height: 270px;
+            border-radius: 10px;
+            background: #212121;
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .kp p {
+            height: 100%;
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all .5s;
+            background: #212121;
+            border: 1px solid #ff5a91;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kp p:hover {
+            flex: 4;
+        }
+
+        .kp p span {
+            min-width: 200px;
+            padding: 15px;
+            text-align: center;
+            transform: rotate(-90deg);
+            transition: all .5s;
+            text-transform: uppercase;
+            color: #ff568e;
+            letter-spacing: .1em;
+        }
+
+        .kp p:hover span {
+            transform: rotate(0);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="kp">
+        <p><span>html</span></p>
+        <p><span>css</span></p>
+        <p><span>js</span></p>
+    </div>
+</body>
+
+</html>

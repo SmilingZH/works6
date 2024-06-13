@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习六</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* margin: 3px; */
+            /* border: 1px solid black; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: rgb(255, 244, 231);
+            height: 100%;
+            margin: 0;
+            position: relative;
+            top: 10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            transform: scale();
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 卡片 */
+        .kp {
+            width: 210px;
+            height: 270px;
+            border-radius: 10px;
+            background: #212121;
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+        }
+
+        .kp p {
+            height: 100%;
+            flex: 1;
+            overflow: hidden;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all .5s;
+            background: #212121;
+            border: 1px solid #ff5a91;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .kp p:hover {
+            flex: 4;
+        }
+
+        .kp p span {
+            min-width: 200px;
+            padding: 15px;
+            text-align: center;
+            transform: rotate(-90deg);
+            transition: all .5s;
+            text-transform: uppercase;
+            color: #ff568e;
+            letter-spacing: .1em;
+        }
+
+        .kp p:hover span {
+            transform: rotate(0);
+        }
+    </style>
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <!-- 主体部分 -->
+    <div class="kp">
+        <p><span>html</span></p>
+        <p><span>css</span></p>
+        <p><span>js</span></p>
+    </div>
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;!-- 主体部分 --&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;p&gt;&lt;span&gt;html&lt;/span&gt;&lt;/p&gt;<br>
+                    &lt;p&gt;&lt;span&gt;css&lt;/span&gt;&lt;/p&gt;<br>
+                    &lt;p&gt;&lt;span&gt;js&lt;/span&gt;&lt;/p&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    *{<br>
+                    font-family: monospace;<br>
+                    font-size: 16px;<br>
+                    }<br>
+                    body {<br>
+                    background-color: rgb(255, 244, 231);<br>
+                    height: 100%;<br>
+                    margin: 0;<br>
+                    position: relative;<br>
+                    top: 10vh;<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    flex-direction: column;<br>
+                    transform: scale();<br>
+                    }<br>
+                    /* 卡片 */<br>
+                    .kp {<br>
+                    width: 210px;<br>
+                    height: 270px;<br>
+                    border-radius: 10px;<br>
+                    background: #212121;<br>
+                    display: flex;<br>
+                    gap: 5px;<br>
+                    padding: 10px;<br>
+                    }<br>
+
+                    .kp p {<br>
+                    height: 100%;<br>
+                    flex: 1;<br>
+                    overflow: hidden;<br>
+                    cursor: pointer;<br>
+                    border-radius: 10px;<br>
+                    transition: all .5s;<br>
+                    background: #212121;<br>
+                    border: 1px solid #ff5a91;<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    }<br>
+
+                    .kp p:hover {<br>
+                    flex: 4;<br>
+                    }<br>
+
+                    .kp p span {<br>
+                    min-width: 200px;<br>
+                    padding: 15px;<br>
+                    text-align: center;<br>
+                    transform: rotate(-90deg);<br>
+                    transition: all .5s;<br>
+                    text-transform: uppercase;<br>
+                    color: #ff568e;<br>
+                    letter-spacing: .1em;<br>
+                    }<br>
+
+                    .kp p:hover span {<br>
+                    transform: rotate(0);<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <!-- <div class="js">
+                                <div class="lb-wz">js</div>
+                                <div class="dm">
+                                    <p></p>
+                                </div>
+                            </div> -->
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <!-- <li class="menu-item">
+                                        <i class="fa fa-solid fa-share"></i>
+                                        <span>分享</span>
+                                    </li>
+                                    <li class="menu-item">
+                                        <i class="fa fa-solid fa-trash"></i>
+                                        <span>删除</span>
+                                    </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>

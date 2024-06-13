@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习四</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* margin: 3px; */
+            /* border: 1px solid black; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            top: 10vh;
+            background-color: #f2e9ff;
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 【圈b、c、d、e，光，点】位置 */
+        .q-b,
+        .q-c,
+        .q-d,
+        .q-e,
+        .g,
+        .d {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+        }
+
+        /* 圈a样式 */
+        .q-a {
+            /* 设置文本禁选 */
+            user-select: none;
+            position: relative;
+            width: 230px;
+            height: 230px;
+            border-radius: 100%;
+            background-color: transparent;
+        }
+
+        .q-b {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            margin: -110px 0 0 -110px;
+            border-radius: 100%;
+            box-shadow: inset 0 3px 10px rgba(0, 0, 0, .6), 0 2px 20px rgba(255, 255, 255, 1);
+            background: #888888;
+            background: radial-gradient(circle at center, #888888 0%, #333333 100%);
+        }
+
+        .q-c {
+            z-index: 4;
+            width: 140px;
+            height: 140px;
+            margin: -70px 0 0 -70px;
+            border-radius: 100%;
+            box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);
+            background: #f2f6f5;
+            background: linear-gradient(to bottom, #f2f6f5 0%, #cbd5d6 100%);
+        }
+
+        .q-d {
+            width: 120px;
+            height: 120px;
+            margin: -60px 0 0 -60px;
+            border-radius: 100%;
+            background: #cbd5d6;
+            background: linear-gradient(to bottom, #cbd5d6 0%, #f2f6f5 100%);
+        }
+
+        .q-e {
+            width: 100px;
+            height: 100px;
+            margin: -50px 0 0 -50px;
+            border-radius: 100%;
+            box-shadow: inset 0 2px 3px rgba(255, 255, 255, .6), 0 8px 20px rgba(0, 0, 0, .9);
+            background: #eef7f6;
+            background: linear-gradient(to bottom, #eef7f6 0%, #8d989a 100%);
+        }
+
+        .xx {
+            z-index: 3;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .xx label {
+            z-index: 2;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            height: 70px;
+            margin-top: -35px;
+            transform-origin: 0% 50%;
+        }
+
+        .xx label:after {
+            content: "";
+            position: absolute;
+            top: 6px;
+            left: 1px;
+            width: 100%;
+            height: 30px;
+            transform: rotate(-30deg);
+        }
+
+        .xx label:before {
+            content: "";
+            position: absolute;
+            bottom: 6px;
+            left: 1px;
+            width: 100%;
+            height: 30px;
+            transform: rotate(30deg);
+        }
+
+        .xx label span {
+            z-index: 2;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 100%;
+            font-weight: bold;
+            font-size: 15px;
+            line-height: 70px;
+            text-align: center;
+            color: #eee;
+            text-shadow: 0 1px 0 #444;
+        }
+
+        .xx label:nth-child(1) {
+            transform: rotate(-90deg);
+        }
+
+        .xx label:nth-child(1) span {
+            right: 2px;
+            font-size: 13px;
+            transform: rotate(90deg);
+        }
+
+        .xx label:nth-child(2) {
+            transform: rotate(-30deg);
+        }
+
+        .xx label:nth-child(2) span {
+            transform: rotate(30deg);
+        }
+
+        .xx label:nth-child(3) {
+            transform: rotate(30deg);
+        }
+
+        .xx label:nth-child(3) span {
+            transform: rotate(-30deg);
+        }
+
+        .xx label:nth-child(4) {
+            transform: rotate(90deg);
+        }
+
+        .xx label:nth-child(4) span {
+            transform: rotate(-90deg);
+        }
+
+        .xx label:nth-child(5) {
+            transform: rotate(150deg);
+        }
+
+        .xx label:nth-child(5) span {
+            transform: rotate(-150deg);
+        }
+
+        .xx label:nth-child(6) {
+            transform: rotate(210deg);
+        }
+
+        .xx label:nth-child(6) span {
+            transform: rotate(-210deg);
+        }
+
+        .xx input {
+            position: absolute;
+            opacity: 0;
+            /* 设置为不可见 */
+            visibility: hidden;
+        }
+
+        /* 光样式 */
+        .g {
+            z-index: 1;
+            width: 50%;
+            height: 100px;
+            margin-top: -50px;
+            transform-origin: 0% 50%;
+            transform: rotate(-90deg);
+            transition: all .5s;
+        }
+
+        .g span {
+            opacity: .4;
+            position: absolute;
+            top: 0;
+            left: 15px;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(ellipse at center,
+                    rgba(184, 163, 204, 1) 0%,
+                    rgba(159, 197, 224, 0.42) 42%,
+                    rgba(111, 113, 179, 0) 72%,
+                    rgba(67, 34, 137, 0) 100%);
+        }
+
+        /*  */
+        #xx-off:checked~.g {
+            transform: rotate(-90deg);
+        }
+
+        #xx-1:checked~.g {
+            transform: rotate(-30deg);
+        }
+
+        #xx-2:checked~.g {
+            transform: rotate(30deg);
+        }
+
+        #xx-3:checked~.g {
+            transform: rotate(90deg);
+        }
+
+        #xx-4:checked~.g {
+            transform: rotate(150deg);
+        }
+
+        #xx-5:checked~.g {
+            transform: rotate(210deg);
+        }
+
+        #xx-off:checked~.d {
+            transform: rotate(-90deg);
+        }
+
+        #xx-1:checked~.d {
+            transform: rotate(-30deg);
+        }
+
+        #xx-2:checked~.d {
+            transform: rotate(30deg);
+        }
+
+        #xx-3:checked~.d {
+            transform: rotate(90deg);
+        }
+
+        #xx-4:checked~.d {
+            transform: rotate(150deg);
+        }
+
+        #xx-5:checked~.d {
+            transform: rotate(210deg);
+        }
+
+        /*  */
+        .d {
+            z-index: 6;
+            width: 50%;
+            height: 12px;
+            margin-top: -6px;
+            transform-origin: 0% 50%;
+            transition: all .5s;
+        }
+
+        .d span {
+            position: absolute;
+            top: 0;
+            left: 30px;
+            width: 12px;
+            height: 12px;
+            border-radius: 100%;
+            background: #dae2e4;
+            background: linear-gradient(to bottom, #dae2e4 0%, #ecf5f4 100%);
+        }
+
+        .q-b hr {
+            z-index: 1;
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            height: 0;
+            margin-top: -1px;
+            border-width: 1px 0;
+            border-style: solid;
+            border-top-color: #3c3d3f;
+            border-bottom-color: #666769;
+        }
+
+        .q-b hr:nth-child(1) {
+            transform: rotate(-60deg);
+        }
+
+        .q-b hr:nth-child(2) {
+            transform: rotate(60deg);
+        }
+    </style>
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <!-- 主体部分 -->
+    <div>
+        <div class="q-a">
+            <div class="q-b">
+                <hr>
+                <hr>
+                <hr>
+                <div class="xx">
+                    <label for="xx-off"><span>OFF</span></label>
+                    <label for="xx-1"><span>1</span></label>
+                    <label for="xx-2"><span>2</span></label>
+                    <label for="xx-3"><span>3</span></label>
+                    <label for="xx-4"><span>4</span></label>
+                    <label for="xx-5"><span>5</span></label>
+                    <!-- radio:单选框 -->
+                    <input type="radio" checked="" name="xx" id="xx-off">
+                    <input type="radio" name="xx" id="xx-1">
+                    <input type="radio" name="xx" id="xx-2">
+                    <input type="radio" name="xx" id="xx-3">
+                    <input type="radio" name="xx" id="xx-4">
+                    <input type="radio" name="xx" id="xx-5">
+                    <div class="g"><span></span></div>
+                    <div class="d"><span></span></div>
+                    <div class="q-c">
+                        <div class="q-d">
+                            <div class="q-e"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 160px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;!-- 主体部分 --&gt;<br>
+                    &lt;div&gt;<br>
+                    &lt;div class="q-a"&gt;<br>
+                    &lt;div class="q-b"&gt;<br>
+                    &lt;hr&gt;<br>
+                    &lt;hr&gt;<br>
+                    &lt;hr&gt;<br>
+                    &lt;div class="xx"&gt;<br>
+                    &lt;label for="xx-off"&gt;&lt;span&gt;OFF&lt;/span&gt;&lt;/label&gt;<br>
+                    &lt;label for="xx-1"&gt;&lt;span&gt;1&lt;/span&gt;&lt;/label&gt;<br>
+                    &lt;label for="xx-2"&gt;&lt;span&gt;2&lt;/span&gt;&lt;/label&gt;<br>
+                    &lt;label for="xx-3"&gt;&lt;span&gt;3&lt;/span&gt;&lt;/label&gt;<br>
+                    &lt;label for="xx-4"&gt;&lt;span&gt;4&lt;/span&gt;&lt;/label&gt;<br>
+                    &lt;label for="xx-5"&gt;&lt;span&gt;5&lt;/span&gt;&lt;/label&gt;<br>
+                    &lt;!-- radio:单选框 --&gt;<br>
+                    &lt;input type="radio" checked="" name="xx" id="xx-off"&gt;<br>
+                    &lt;input type="radio" name="xx" id="xx-1"&gt;<br>
+                    &lt;input type="radio" name="xx" id="xx-2"&gt;<br>
+                    &lt;input type="radio" name="xx" id="xx-3"&gt;<br>
+                    &lt;input type="radio" name="xx" id="xx-4"&gt;<br>
+                    &lt;input type="radio" name="xx" id="xx-5"&gt;<br>
+                    &lt;div class="g"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;<br>
+                    &lt;div class="d"&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;<br>
+                    &lt;div class="q-c"&gt;<br>
+                    &lt;div class="q-d"&gt;<br>
+                    &lt;div class="q-e"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    *{<br>
+                    font-family: monospace;<br>
+                    font-size: 16px;<br>
+                    }<br>
+                    body {<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    flex-direction: column;<br>
+                    position: relative;<br>
+                    top: 10vh;<br>
+                    background-color: #f2e9ff;<br>
+                    }<br>
+                    /* 【圈b、c、d、e，光，点】位置 */<br>
+                    .q-b,<br>
+                    .q-c,<br>
+                    .q-d,<br>
+                    .q-e,<br>
+                    .g,<br>
+                    .d {<br>
+                    position: absolute;<br>
+                    left: 50%;<br>
+                    top: 50%;<br>
+                    }<br>
+
+                    /* 圈a样式 */<br>
+                    .q-a {<br>
+                    /* 设置文本禁选 */<br>
+                    user-select: none;<br>
+                    position: relative;<br>
+                    width: 230px;<br>
+                    height: 230px;<br>
+                    border-radius: 100%;<br>
+                    background-color: transparent;<br>
+                    }<br>
+
+                    .q-b {<br>
+                    position: relative;<br>
+                    width: 220px;<br>
+                    height: 220px;<br>
+                    margin: -110px 0 0 -110px;<br>
+                    border-radius: 100%;<br>
+                    box-shadow: inset 0 3px 10px rgba(0, 0, 0, .6), 0 2px 20px rgba(255, 255, 255, 1);<br>
+                    background: #888888;<br>
+                    background: radial-gradient(circle at center, #888888 0%, #333333 100%);<br>
+                    }<br>
+
+                    .q-c {<br>
+                    z-index: 4;<br>
+                    width: 140px;<br>
+                    height: 140px;<br>
+                    margin: -70px 0 0 -70px;<br>
+                    border-radius: 100%;<br>
+                    box-shadow: inset 0 2px 2px rgba(255, 255, 255, .4), 0 3px 13px rgba(0, 0, 0, .85);<br>
+                    background: #f2f6f5;<br>
+                    background: linear-gradient(to bottom, #f2f6f5 0%, #cbd5d6 100%);<br>
+                    }<br>
+
+                    .q-d {<br>
+                    width: 120px;<br>
+                    height: 120px;<br>
+                    margin: -60px 0 0 -60px;<br>
+                    border-radius: 100%;<br>
+                    background: #cbd5d6;<br>
+                    background: linear-gradient(to bottom, #cbd5d6 0%, #f2f6f5 100%);<br>
+                    }<br>
+
+                    .q-e {<br>
+                    width: 100px;<br>
+                    height: 100px;<br>
+                    margin: -50px 0 0 -50px;<br>
+                    border-radius: 100%;<br>
+                    box-shadow: inset 0 2px 3px rgba(255, 255, 255, .6), 0 8px 20px rgba(0, 0, 0, .9);<br>
+                    background: #eef7f6;<br>
+                    background: linear-gradient(to bottom, #eef7f6 0%, #8d989a 100%);<br>
+                    }<br>
+
+                    .xx {<br>
+                    z-index: 3;<br>
+                    position: absolute;<br>
+                    top: 0;<br>
+                    left: 0;<br>
+                    width: 100%;<br>
+                    height: 100%;<br>
+                    }<br>
+
+                    .xx label {<br>
+                    z-index: 2;<br>
+                    position: absolute;<br>
+                    top: 50%;<br>
+                    left: 50%;<br>
+                    width: 50%;<br>
+                    height: 70px;<br>
+                    margin-top: -35px;<br>
+                    transform-origin: 0% 50%;<br>
+                    }<br>
+
+                    .xx label:after {<br>
+                    content: "";<br>
+                    position: absolute;<br>
+                    top: 6px;<br>
+                    left: 1px;<br>
+                    width: 100%;<br>
+                    height: 30px;<br>
+                    transform: rotate(-30deg);<br>
+                    }<br>
+
+                    .xx label:before {<br>
+                    content: "";<br>
+                    position: absolute;<br>
+                    bottom: 6px;<br>
+                    left: 1px;<br>
+                    width: 100%;<br>
+                    height: 30px;<br>
+                    transform: rotate(30deg);<br>
+                    }<br>
+
+                    .xx label span {<br>
+                    z-index: 2;<br>
+                    position: absolute;<br>
+                    top: 0;<br>
+                    right: 0;<br>
+                    width: 40px;<br>
+                    height: 100%;<br>
+                    font-weight: bold;<br>
+                    font-size: 15px;<br>
+                    line-height: 70px;<br>
+                    text-align: center;<br>
+                    color: #eee;<br>
+                    text-shadow: 0 1px 0 #444;<br>
+                    }<br>
+
+                    .xx label:nth-child(1) {<br>
+                    transform: rotate(-90deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(1) span {<br>
+                    right: 2px;<br>
+                    font-size: 13px;<br>
+                    transform: rotate(90deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(2) {<br>
+                    transform: rotate(-30deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(2) span {<br>
+                    transform: rotate(30deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(3) {<br>
+                    transform: rotate(30deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(3) span {<br>
+                    transform: rotate(-30deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(4) {<br>
+                    transform: rotate(90deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(4) span {<br>
+                    transform: rotate(-90deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(5) {<br>
+                    transform: rotate(150deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(5) span {<br>
+                    transform: rotate(-150deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(6) {<br>
+                    transform: rotate(210deg);<br>
+                    }<br>
+
+                    .xx label:nth-child(6) span {<br>
+                    transform: rotate(-210deg);<br>
+                    }<br>
+
+                    .xx input {<br>
+                    position: absolute;<br>
+                    opacity: 0;<br>
+                    /* 设置为不可见 */<br>
+                    visibility: hidden;<br>
+                    }<br>
+
+                    /* 光样式 */<br>
+                    .g {<br>
+                    z-index: 1;<br>
+                    width: 50%;<br>
+                    height: 100px;<br>
+                    margin-top: -50px;<br>
+                    transform-origin: 0% 50%;<br>
+                    transform: rotate(-90deg);<br>
+                    transition: all .5s;<br>
+                    }<br>
+
+                    .g span {<br>
+                    opacity: .4;<br>
+                    position: absolute;<br>
+                    top: 0;<br>
+                    left: 15px;<br>
+                    width: 100px;<br>
+                    height: 100px;<br>
+                    background: radial-gradient(ellipse at center,<br>
+                    rgba(184, 163, 204, 1) 0%,<br>
+                    rgba(159, 197, 224, 0.42) 42%,<br>
+                    rgba(111, 113, 179, 0) 72%,<br>
+                    rgba(67, 34, 137, 0) 100%);<br>
+                    }<br>
+
+                    /* */<br>
+                    #xx-off:checked~.g {<br>
+                    transform: rotate(-90deg);<br>
+                    }<br>
+
+                    #xx-1:checked~.g {<br>
+                    transform: rotate(-30deg);<br>
+                    }<br>
+
+                    #xx-2:checked~.g {<br>
+                    transform: rotate(30deg);<br>
+                    }<br>
+
+                    #xx-3:checked~.g {<br>
+                    transform: rotate(90deg);<br>
+                    }<br>
+
+                    #xx-4:checked~.g {<br>
+                    transform: rotate(150deg);<br>
+                    }<br>
+
+                    #xx-5:checked~.g {<br>
+                    transform: rotate(210deg);<br>
+                    }<br>
+
+                    #xx-off:checked~.d {<br>
+                    transform: rotate(-90deg);<br>
+                    }<br>
+
+                    #xx-1:checked~.d {<br>
+                    transform: rotate(-30deg);<br>
+                    }<br>
+
+                    #xx-2:checked~.d {<br>
+                    transform: rotate(30deg);<br>
+                    }<br>
+
+                    #xx-3:checked~.d {<br>
+                    transform: rotate(90deg);<br>
+                    }<br>
+
+                    #xx-4:checked~.d {<br>
+                    transform: rotate(150deg);<br>
+                    }<br>
+
+                    #xx-5:checked~.d {<br>
+                    transform: rotate(210deg);<br>
+                    }<br>
+
+                    /* */<br>
+                    .d {<br>
+                    z-index: 6;<br>
+                    width: 50%;<br>
+                    height: 12px;<br>
+                    margin-top: -6px;<br>
+                    transform-origin: 0% 50%;<br>
+                    transition: all .5s;<br>
+                    }<br>
+
+                    .d span {<br>
+                    position: absolute;<br>
+                    top: 0;<br>
+                    left: 30px;<br>
+                    width: 12px;<br>
+                    height: 12px;<br>
+                    border-radius: 100%;<br>
+                    background: #dae2e4;<br>
+                    background: linear-gradient(to bottom, #dae2e4 0%, #ecf5f4 100%);<br>
+                    }<br>
+
+                    .q-b hr {<br>
+                    z-index: 1;<br>
+                    position: absolute;<br>
+                    top: 50%;<br>
+                    width: 100%;<br>
+                    height: 0;<br>
+                    margin-top: -1px;<br>
+                    border-width: 1px 0;<br>
+                    border-style: solid;<br>
+                    border-top-color: #3c3d3f;<br>
+                    border-bottom-color: #666769;<br>
+                    }<br>
+
+                    .q-b hr:nth-child(1) {<br>
+                    transform: rotate(-60deg);<br>
+                    }<br>
+
+                    .q-b hr:nth-child(2) {<br>
+                    transform: rotate(60deg);<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <!-- <div class="js">
+                        <div class="lb-wz">js</div>
+                        <div class="dm">
+                            <p></p>
+                        </div>
+                    </div> -->
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <!-- <li class="menu-item">
+                                    <i class="fa fa-solid fa-share"></i>
+                                    <span>分享</span>
+                                </li>
+                                <li class="menu-item">
+                                    <i class="fa fa-solid fa-trash"></i>
+                                    <span>删除</span>
+                                </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>

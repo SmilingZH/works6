@@ -1,0 +1,109 @@
+/* 弹窗菜单样式 */
+
+
+.menu-box {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+}
+
+.menu-button {
+    width: 50px;
+    height: 50px;
+    background-color: #5c67ff;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px rgba(92, 103, 255, 0.3);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+}
+
+.menu-button:hover {
+    background-color: #4854ff;
+    box-shadow: 0 0 0 8px rgba(92, 103, 255, 0.3);
+}
+
+.menu-button .line-box {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 0.3s ease-out;
+}
+
+.menu-button .line {
+    background-color: #fff;
+    width: 100%;
+    height: 2px;
+    border-radius: 2px;
+}
+
+.menu-list {
+    width: 140px;
+    background-color: #fff;
+    border-radius: 8px;
+    list-style: none;
+    padding: 6px;
+    box-shadow: 0 0 4px 4px rgba(92, 103, 255, 0.15);
+    position: absolute;
+    right: 15px;
+    bottom: 15px;
+    opacity: 0;
+    transform: scale(0);
+    transform-origin: bottom right;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+}
+
+.menu-list.active {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.menu-list .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    color: #1c3991;
+    cursor: pointer;
+    position: relative;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.menu-list .menu-item.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.menu-list .menu-item:hover {
+    color: #5c67ff;
+}
+
+.menu-list .menu-item::before {
+    content: "";
+    width: calc(100%-24px);
+    height: 1px;
+    background-color: rgba(92, 103, 255, 0.1);
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+}
+
+.menu-list .menu-item:last-child::before {
+    display: none;
+}
+
+.menu-list span {
+    font-size: 14px;
+    margin-left: 8px;
+}

@@ -1,0 +1,109 @@
+* {
+    /* margin: 3px;
+    padding: 3px;
+    border: 1px solid black; */
+    font-family: monospace;
+    font-size: 16px;
+}
+
+body {
+    background-image: linear-gradient(to top, #d4fffd 0%, #fcdbe6 100%);
+}
+
+.toubu {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 打字效果样式 */
+.dz {
+    font-family: monospace;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 1em;
+}
+
+.dz-a {
+    margin: 10px;
+    padding: 10px;
+    color: rgb(5, 144, 144);
+    font-size: 20px;
+}
+
+.buju {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 50px;
+}
+
+.zibuju-a {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.zibuju-b {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.zibuju-b a {
+    padding: 2px;
+    display: flex;
+    justify-content: center;
+    color: #000000;
+    text-decoration: none;
+    transition: 0.5s;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 20px;
+    margin-left: 15px;
+    width: 100px;
+}
+
+.zibuju-b a:hover {
+    background-color: #000000;
+    color: white;
+}
+
+
+.zibuju-c {
+    height: 35px;
+    width: 240px;
+    min-width: 15vh;
+    margin: 5px;
+    /* background-color: rgb(230, 255, 238); */
+    border-radius: 18px;
+    box-shadow:
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+}
+
+.chichun-bujukuang {
+    margin: 10px;
+    flex: 0 0 25%;
+    min-width: 35vh;
+    width: 300px;
+    height: 320px;
+}
+
+.chichun-zhanshikuang {
+    margin: 5px;
+    min-width: 15vh;
+    width: 240px;
+    height: 260px;
+}
+
+.chichun-zhanshikuang iframe {
+    border-radius: 20px;
+    box-shadow: inset 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.2),
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+}

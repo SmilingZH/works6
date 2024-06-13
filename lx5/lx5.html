@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习五</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* border: 1px solid black; */
+            /* margin: 3px; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: rgb(228, 242, 255);
+            position: relative;
+            height: 80vh;
+            width: 110vh;
+            top: 5vh;
+            left: -10vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: scale(.6);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 卡片样式 */
+        .kp {
+            width: 290px;
+            height: 370px;
+            background: linear-gradient(135deg, rgba(48, 48, 48, 1) 48%, rgba(0, 0, 0, 1) 100%);
+            background-size: 300%, 300%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border-radius: 40px;
+            box-shadow: 5px 5px 15px 5px #a3a3a3;
+            overflow: hidden;
+            transition: all 1s ease;
+        }
+
+        /* 月亮 */
+        .yl {
+            font-size: 80px;
+            top: 15%;
+            right: 120px;
+            position: absolute;
+            color: white;
+            transform: rotate(-20deg);
+            transition: all 1s ease;
+        }
+
+        /* 火箭 */
+        .hj {
+            font-size: 60px;
+            bottom: -2%;
+            left: -2%;
+            position: absolute;
+            color: white;
+            transition: all 1.9s ease;
+        }
+
+        /* 星星 */
+        .xx {
+            position: absolute;
+            color: rgb(237, 228, 90);
+        }
+
+        .xx-1 {
+            font-size: 100px;
+            bottom: 90px;
+            left: -25px;
+            transition: all 1s ease;
+        }
+
+        .xx-2 {
+            font-size: 150px;
+            top: -10%;
+            left: -20%;
+            transition: all .5s ease;
+        }
+
+        .xx-3 {
+            font-size: 100px;
+            bottom: 5%;
+            right: -15px;
+            transition: all .3s ease;
+        }
+
+        .xx-4 {
+            font-size: 20px;
+            top: 4%;
+            right: 5px;
+            transition: all 1.4s ease;
+        }
+
+        .xx-5 {
+            font-size: 20px;
+            bottom: 24%;
+            right: 45%;
+            animation: xz 3s normal linear infinite;
+        }
+
+        .xx-6 {
+            font-size: 20px;
+            top: 14%;
+            right: 25%;
+            animation: xz 5s normal linear infinite;
+        }
+
+        .xx-7 {
+            font-size: 40px;
+            top: 34%;
+            right: 65%;
+            animation: xz 5s normal linear infinite;
+        }
+
+        /* 文字 */
+        .kp-wz {
+            font-size: 16px;
+            color: white;
+            font-weight: 600;
+            transition: all 1s ease;
+        }
+
+        .kp:hover {
+            background: linear-gradient(135deg, rgba(48, 48, 48, 1) 10%, rgba(0, 0, 0, 1) 90%);
+            background-size: 100%, 100%;
+        }
+
+        .kp:hover .xx-1,
+        .kp:hover .xx-3 {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .kp:hover .xx-2,
+        .kp:hover .xx-4 {
+            transform: scale(1.2) rotate(-150deg);
+        }
+
+        .kp:hover .hj {
+            transform: scale(.3) translate(450px, -730px) rotate(-260deg);
+        }
+
+        .kp:hover .yl {
+            font-size: 50px;
+        }
+
+        .kp:hover .kp-wz {
+            font-size: 20px;
+        }
+
+        /* 星星旋转动画 */
+        @keyframes xz {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主题部分 -->
+    <div class="kp">
+        <i class="fa-solid fa-star xx xx-1"></i>
+        <i class="fa-solid fa-star xx xx-2"></i>
+        <i class="fa-solid fa-star xx xx-3"></i>
+        <i class="fa-solid fa-star xx xx-4"></i>
+        <i class="fa-solid fa-star xx xx-5"></i>
+        <i class="fa-solid fa-star xx xx-6"></i>
+        <i class="fa-solid fa-star xx xx-7"></i>
+        <div class="kp-wz">
+            <span>飞向---月亮！！</span>
+        </div>
+        <i class="fa-solid fa-moon yl"></i>
+        <i class="fa-solid fa-rocket hj"></i>
+    </div>
+</body>
+
+</html>

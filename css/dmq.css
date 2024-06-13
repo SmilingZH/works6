@@ -1,0 +1,58 @@
+/* 代码区样式 */
+
+/* 代码区 */
+.dmq {
+    /* border: 1px solid black; */
+    border-radius: 20px;
+    height: auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: aliceblue;
+    box-shadow:
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+}
+
+/* 类别 */
+.html,
+.css,
+.js {
+    margin: 10px;
+    flex: 1;
+    height: 480px;
+    border-radius: 19px;
+    min-width: 30vh;
+
+}
+
+/* 类别文字样式 */
+.lb-wz {
+    height: 30px;
+    margin: 10px;
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ccffe9;
+    box-shadow:
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+}
+
+/* 代码 */
+.dm {
+    border-radius: 18px;
+    margin: 10px;
+    height: 415px;
+    overflow: auto;
+    background-color: rgb(171, 171, 171);
+    box-shadow: inset 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.2),
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+}

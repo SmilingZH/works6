@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习一</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* margin: 3px;
+            border: 1px solid black; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            top: 15vh;
+            margin: 0;
+            background-color: rgb(255, 223, 252);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 总布局 */
+        .zbj {
+            transform: scale(2);
+            width: 145px;
+            height: 150px;
+            perspective: 500px;
+        }
+
+        /* 卡片样式 */
+        .kp {
+            height: 100%;
+            border-radius: 20px;
+            /* 线性渐变 */
+            background: linear-gradient(135deg, rgb(0, 255, 214) 0%, rgb(8, 226, 96) 100%);
+            /* 曲线动画，快进ease-in快出ease-out，all（应用于所有动画） */
+            transition: all 0.5s ease-in-out;
+            transform-style: preserve-3d;
+            box-shadow: rgba(5, 71, 17, 0) 20px 25px 12.5px -20px, rgba(5, 71, 17, 0.2) 0px 12.5px 12.5px -2.5px;
+        }
+
+        /* 玻璃样式 */
+        .bl {
+            transform-style: preserve-3d;
+            position: absolute;
+            /* inset=top,right,buttom,left上，右，下，左 */
+            inset: 4px;
+            border-radius: 27.5px;
+            border-top-right-radius: 100%;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.815) 100%);
+            /* 为后面的图形加效果，blur模糊，用于毛玻璃，-webkit旧版兼容 */
+            -webkit-backdrop-filter: blur(2.5px);
+            backdrop-filter: blur(2.5px);
+            /* x，y，z */
+            transform: translate3d(0px, 0px, 12.5px);
+            border-left: 1px solid white;
+            border-bottom: 1px solid white;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* 文字内容 */
+        .nr {
+            padding: 50px 30px 0px 15px;
+            transform: translate3d(0, 0, 13px);
+        }
+
+        /* 内容-标题 */
+        .nr-bt {
+            display: block;
+            color: #00894d;
+            font-weight: 450;
+            font-size: 10px;
+        }
+
+        /* 内容-正文 */
+        .nr-zw {
+            display: block;
+            color: rgba(0, 137, 78, 0.7647058824);
+            font-size: 7.5px;
+            margin-top: 10px;
+        }
+
+        /* 软件图标 */
+        .tb {
+            padding: 5px 5px;
+            transform-style: preserve-3d;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translate3d(0, 0, 13px);
+        }
+
+        /* 图标布局 */
+        .tb-bj {
+            display: flex;
+            gap: 5px;
+            transform-style: preserve-3d;
+        }
+
+        /* 图标样式 */
+        .tb-ys {
+            width: 15px;
+            height: 15px;
+            padding: 2.5px;
+            background: rgb(255, 255, 255);
+            border-radius: 50%;
+            border: none;
+            display: grid;
+            place-content: center;
+            box-shadow: rgba(5, 71, 17, 0.5) 0px 3.5px 2.5px -2.5px;
+            cursor: pointer;
+        }
+
+        .tb-ys span i {
+            font-size: 8px;
+        }
+
+        /* 设置图标布局中第一个图标样式过度 */
+        .tb-ys:first-child {
+            transition: transform 0.2s ease-in-out 0.4s, box-shadow 0.2s ease-in-out 0.4s;
+        }
+
+        /* 第二个 */
+        .tb-ys:nth-child(2) {
+            transition: transform 0.2s ease-in-out 0.6s, box-shadow 0.2s ease-in-out 0.6s;
+        }
+
+        /* 第三个 */
+        .tb-ys:nth-child(3) {
+            transition: transform 0.2s ease-in-out 0.8s, box-shadow 0.2s ease-in-out 0.8s;
+        }
+
+        .tb-ys span {
+            font-size: 8px;
+            color: #00894d;
+        }
+
+        .tb-ys:hover {
+            background: black;
+        }
+
+        .tb-ys:hover span {
+            color: white;
+        }
+
+        /* 鼠标按下未松开时的样式 */
+        .tb-ys:active {
+            background: rgb(255, 234, 0);
+        }
+
+        .tb-ys:active span {
+            color: black;
+        }
+
+        /* logo */
+        .logo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform-style: preserve-3d;
+        }
+
+        /* logo下面的圈 */
+        .logo-q {
+            display: block;
+            position: absolute;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            top: 0;
+            right: 0;
+            box-shadow: rgba(100, 100, 111, 0.2) -5px 5px 10px 0px;
+            -webkit-backdrop-filter: blur(2.5px);
+            backdrop-filter: blur(2.5px);
+            background: rgba(0, 249, 203, 0.2);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .logo-q1 {
+            width: 85px;
+            transform: translate3d(0, 0, 10px);
+            top: 4px;
+            right: 4px;
+        }
+
+        .logo-q2 {
+            width: 70px;
+            transform: translate3d(0, 0, 20px);
+            top: 5px;
+            right: 5px;
+            -webkit-backdrop-filter: blur(0.5px);
+            backdrop-filter: blur(0.5px);
+            transition-delay: 0.4s;
+        }
+
+        .logo-q3 {
+            width: 55px;
+            transform: translate3d(0, 0, 30px);
+            top: 8.5px;
+            right: 8.5px;
+            transition-delay: 0.8s;
+        }
+
+        .logo-q4 {
+            width: 40px;
+            transform: translate3d(0, 0, 40px);
+            top: 11.5px;
+            right: 11.5px;
+            transition-delay: 1.2s;
+        }
+
+        .logo-q5 {
+            width: 25px;
+            transform: translate3d(0, 0, 50px);
+            top: 15px;
+            right: 15px;
+            display: grid;
+            place-content: center;
+            transition-delay: 1.6s;
+        }
+
+        /* 卡片悬停样式 */
+        .zbj:hover .kp {
+            transform: rotate3d(1, 1, 0, 30deg);
+            box-shadow: rgba(5, 71, 17, 0.3) 15px 25px 12.5px -20px, rgba(5, 71, 17, 0.1) 0px 12.5px 15px 0px;
+        }
+
+        .zbj:hover .kp .tb-ys {
+            transform: translate3d(0, 0, 25px);
+            box-shadow: rgba(5, 71, 17, 0.2) -2.5px 10px 5px 0px;
+        }
+
+        /* logo圈悬停样式 */
+        .zbj:hover .kp .logo .logo-q2 {
+            transform: translate3d(0, 0, 30px);
+        }
+
+        .zbj:hover .kp .logo .logo-q3 {
+            transform: translate3d(0, 0, 40px);
+        }
+
+        .zbj:hover .kp .logo .logo-q4 {
+            transform: translate3d(0, 0, 50px);
+        }
+
+        .zbj:hover .kp .logo .logo-q5 {
+            transform: translate3d(0, 0, 60px);
+        }
+    </style>
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <!-- 主体样式 -->
+    <div class="zbj">
+        <div class="kp">
+            <!-- logo，圈 -->
+            <div class="logo">
+                <span class="logo-q logo-q1"></span>
+                <span class="logo-q logo-q2"></span>
+                <span class="logo-q logo-q3"></span>
+                <span class="logo-q logo-q4"></span>
+                <span class="logo-q logo-q5">
+                    <i class="fa-solid fa-user " style="color: #ffffff;transform: scale(.8);"></i>
+                </span>
+            </div>
+            <!-- 毛玻璃 -->
+            <div class="bl"></div>
+            <!-- 文字内容 -->
+            <div class="nr">
+                <span class="nr-bt">练习一 (3D UI)</span>
+                <span class="nr-zw">使用html，css制作，旋转动效以及鼠标悬停样式全部由css完成</span>
+            </div>
+            <!-- 软件图标 -->
+            <div class="tb">
+                <div class="tb-bj">
+                    <button class="tb-ys">
+                        <span>
+                            <i class="fa-brands fa-qq"></i>
+                        </span>
+                    </button>
+                    <button class="tb-ys">
+                        <span>
+                            <i class="fa-brands fa-weixin"></i>
+                        </span>
+                    </button>
+                    <button class="tb-ys">
+                        <span>
+                            <i class="fa-brands fa-bilibili"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu">返回上一级</div>
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;!-- 主体样式 --&gt;<br>
+                    &lt;div class="zbj"&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;!-- logo，圈 --&gt;<br>
+                    &lt;div class="logo"&gt;<br>
+                    &lt;span class="logo-q logo-q1"&gt;&lt;/span&gt;<br>
+                    &lt;span class="logo-q logo-q2"&gt;&lt;/span&gt;<br>
+                    &lt;span class="logo-q logo-q3"&gt;&lt;/span&gt;<br>
+                    &lt;span class="logo-q logo-q4"&gt;&lt;/span&gt;<br>
+                    &lt;span class="logo-q logo-q5"&gt;<br>
+                    &lt;i class="fa-solid fa-user " style="color: #ffffff;transform:
+                    scale(.8);"&gt;&lt;/i&gt;<br>
+                    &lt;/span&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;!-- 毛玻璃 --&gt;<br>
+                    &lt;div class="bl"&gt;&lt;/div&gt;<br>
+                    &lt;!-- 文字内容 --&gt;<br>
+                    &lt;div class="nr"&gt;<br>
+                    &lt;span class="nr-bt"&gt;练习二 (3D UI)&lt;/span&gt;<br>
+                    &lt;span
+                    class="nr-zw"&gt;使用html，css制作，旋转动效以及鼠标悬停样式全部由css完成&lt;/span&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;!-- 软件图标 --&gt;<br>
+                    &lt;div class="tb"&gt;<br>
+                    &lt;div class="tb-bj"&gt;<br>
+                    &lt;button class="tb-ys"&gt;<br>
+                    &lt;span&gt;<br>
+                    &lt;i class="fa-brands fa-qq"&gt;&lt;/i&gt;<br>
+                    &lt;/span&gt;<br>
+                    &lt;/button&gt;<br>
+                    &lt;button class="tb-ys"&gt;<br>
+                    &lt;span&gt;<br>
+                    &lt;i class="fa-brands fa-weixin"&gt;&lt;/i&gt;<br>
+                    &lt;/span&gt;<br>
+                    &lt;/button&gt;<br>
+                    &lt;button class="tb-ys"&gt;<br>
+                    &lt;span&gt;<br>
+                    &lt;i class="fa-brands fa-bilibili"&gt;&lt;/i&gt;<br>
+                    &lt;/span&gt;<br>
+                    &lt;/button&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    *{<br>
+                    font-family: monospace;<br>
+                    font-size: 16px;<br>
+                    }<br>
+                    body {<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    flex-direction: column;<br>
+                    position: relative;<br>
+                    top: 15vh;<br>
+                    margin: 0;<br>
+                    background-color: rgb(255, 223, 252);<br>
+                    }<br>
+                    /* 总布局 */<br>
+                    .zbj {<br>
+                    transform: scale(2);<br>
+                    width: 145px;<br>
+                    height: 150px;<br>
+                    perspective: 500px;<br>
+                    }<br>
+
+                    /* 卡片样式 */<br>
+                    .kp {<br>
+                    height: 100%;<br>
+                    border-radius: 20px;<br>
+                    /* 线性渐变 */<br>
+                    background: linear-gradient(135deg, rgb(0, 255, 214) 0%, rgb(8, 226, 96) 100%);<br>
+                    /* 曲线动画，快进ease-in快出ease-out，all（应用于所有动画） */<br>
+                    transition: all 0.5s ease-in-out;<br>
+                    transform-style: preserve-3d;<br>
+                    box-shadow: rgba(5, 71, 17, 0) 20px 25px 12.5px -20px, rgba(5, 71, 17, 0.2) 0px 12.5px 12.5px<br>
+                    -2.5px;<br>
+                    }<br>
+
+                    /* 玻璃样式 */<br>
+                    .bl {<br>
+                    transform-style: preserve-3d;<br>
+                    position: absolute;<br>
+                    /* inset=top,right,buttom,left上，右，下，左 */<br>
+                    inset: 4px;<br>
+                    border-radius: 27.5px;<br>
+                    border-top-right-radius: 100%;<br>
+                    background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.815)
+                    100%);<br>
+                    /* 为后面的图形加效果，blur模糊，用于毛玻璃，-webkit旧版兼容 */<br>
+                    -webkit-backdrop-filter: blur(2.5px);<br>
+                    backdrop-filter: blur(2.5px);<br>
+                    /* x，y，z */<br>
+                    transform: translate3d(0px, 0px, 12.5px);<br>
+                    border-left: 1px solid white;<br>
+                    border-bottom: 1px solid white;<br>
+                    transition: all 0.5s ease-in-out;<br>
+                    }<br>
+
+                    /* 文字内容 */<br>
+                    .nr {<br>
+                    padding: 50px 30px 0px 15px;<br>
+                    transform: translate3d(0, 0, 13px);<br>
+                    }<br>
+
+                    /* 内容-标题 */<br>
+                    .nr-bt {<br>
+                    display: block;<br>
+                    color: #00894d;<br>
+                    font-weight: 450;<br>
+                    font-size: 10px;<br>
+                    }<br>
+
+                    /* 内容-正文 */<br>
+                    .nr-zw {<br>
+                    display: block;<br>
+                    color: rgba(0, 137, 78, 0.7647058824);<br>
+                    font-size: 7.5px;<br>
+                    margin-top: 10px;<br>
+                    }<br>
+
+                    /* 软件图标 */<br>
+                    .tb {<br>
+                    padding: 5px 5px;<br>
+                    transform-style: preserve-3d;<br>
+                    position: absolute;<br>
+                    bottom: 10px;<br>
+                    left: 10px;<br>
+                    right: 10px;<br>
+                    display: flex;<br>
+                    align-items: center;<br>
+                    justify-content: space-between;<br>
+                    transform: translate3d(0, 0, 13px);<br>
+                    }<br>
+
+                    /* 图标布局 */<br>
+                    .tb-bj {<br>
+                    display: flex;<br>
+                    gap: 5px;<br>
+                    transform-style: preserve-3d;<br>
+                    }<br>
+
+                    /* 图标样式 */<br>
+                    .tb-ys {<br>
+                    width: 15px;<br>
+                    height: 15px;<br>
+                    padding: 2.5px;<br>
+                    background: rgb(255, 255, 255);<br>
+                    border-radius: 50%;<br>
+                    border: none;<br>
+                    display: grid;<br>
+                    place-content: center;<br>
+                    box-shadow: rgba(5, 71, 17, 0.5) 0px 3.5px 2.5px -2.5px;<br>
+                    cursor: pointer;<br>
+                    }<br>
+                    .tb-ys span i {<br>
+                    font-size: 8px;<br>
+                    }<br>
+                    /* 设置图标布局中第一个图标样式过度 */<br>
+                    .tb-ys:first-child {<br>
+                    transition: transform 0.2s ease-in-out 0.4s, box-shadow 0.2s ease-in-out 0.4s;<br>
+                    }<br>
+
+                    /* 第二个 */<br>
+                    .tb-ys:nth-child(2) {<br>
+                    transition: transform 0.2s ease-in-out 0.6s, box-shadow 0.2s ease-in-out 0.6s;<br>
+                    }<br>
+
+                    /* 第三个 */
+                    .tb-ys:nth-child(3) {<br>
+                    transition: transform 0.2s ease-in-out 0.8s, box-shadow 0.2s ease-in-out 0.8s;<br>
+                    }<br>
+
+                    .tb-ys span {<br>
+                    font-size: 8px;<br>
+                    color: #00894d;<br>
+                    }<br>
+
+                    .tb-ys:hover {<br>
+                    background: black;<br>
+                    }<br>
+
+                    .tb-ys:hover span {<br>
+                    color: white;<br>
+                    }<br>
+
+                    /* 鼠标按下未松开时的样式 */<br>
+                    .tb-ys:active {<br>
+                    background: rgb(255, 234, 0);<br>
+                    }<br>
+
+                    .tb-ys:active span {<br>
+                    color: black;<br>
+                    }<br>
+
+                    /* logo */<br>
+                    .logo {<br>
+                    position: absolute;<br>
+                    right: 0;<br>
+                    top: 0;<br>
+                    transform-style: preserve-3d;<br>
+                    }<br>
+
+                    /* logo下面的圈 */<br>
+                    .logo-q {<br>
+                    display: block;<br>
+                    position: absolute;<br>
+                    aspect-ratio: 1;<br>
+                    border-radius: 50%;<br>
+                    top: 0;<br>
+                    right: 0;<br>
+                    box-shadow: rgba(100, 100, 111, 0.2) -5px 5px 10px 0px;<br>
+                    -webkit-backdrop-filter: blur(2.5px);<br>
+                    backdrop-filter: blur(2.5px);<br>
+                    background: rgba(0, 249, 203, 0.2);<br>
+                    transition: all 0.5s ease-in-out;<br>
+                    }<br>
+
+                    .logo-q1 {<br>
+                    width: 85px;<br>
+                    transform: translate3d(0, 0, 10px);<br>
+                    top: 4px;<br>
+                    right: 4px;<br>
+                    }<br>
+
+                    .logo-q2 {<br>
+                    width: 70px;<br>
+                    transform: translate3d(0, 0, 20px);<br>
+                    top: 5px;<br>
+                    right: 5px;<br>
+                    -webkit-backdrop-filter: blur(0.5px);<br>
+                    backdrop-filter: blur(0.5px);<br>
+                    transition-delay: 0.4s;<br>
+                    }<br>
+
+                    .logo-q3 {<br>
+                    width: 55px;<br>
+                    transform: translate3d(0, 0, 30px);<br>
+                    top: 8.5px;<br>
+                    right: 8.5px;<br>
+                    transition-delay: 0.8s;<br>
+                    }<br>
+
+                    .logo-q4 {<br>
+                    width: 40px;<br>
+                    transform: translate3d(0, 0, 40px);<br>
+                    top: 11.5px;<br>
+                    right: 11.5px;<br>
+                    transition-delay: 1.2s;<br>
+                    }<br>
+
+                    .logo-q5 {<br>
+                    width: 25px;<br>
+                    transform: translate3d(0, 0, 50px);<br>
+                    top: 15px;<br>
+                    right: 15px;<br>
+                    display: grid;<br>
+                    place-content: center;<br>
+                    transition-delay: 1.6s;<br>
+                    }<br>
+
+                    /* 卡片悬停样式 */<br>
+                    .zbj:hover .kp {<br>
+                    transform: rotate3d(1, 1, 0, 30deg);<br>
+                    box-shadow: rgba(5, 71, 17, 0.3) 15px 25px 12.5px -20px, rgba(5, 71, 17, 0.1) 0px 12.5px 15px
+                    0px;<br>
+                    }<br>
+
+                    .zbj:hover .kp .tb-ys {<br>
+                    transform: translate3d(0, 0, 25px);<br>
+                    box-shadow: rgba(5, 71, 17, 0.2) -2.5px 10px 5px 0px;<br>
+                    }<br>
+
+                    /* logo圈悬停样式 */<br>
+                    .zbj:hover .kp .logo .logo-q2 {<br>
+                    transform: translate3d(0, 0, 30px);<br>
+                    }<br>
+
+                    .zbj:hover .kp .logo .logo-q3 {<br>
+                    transform: translate3d(0, 0, 40px);<br>
+                    }<br>
+
+                    .zbj:hover .kp .logo .logo-q4 {<br>
+                    transform: translate3d(0, 0, 50px);<br>
+                    }<br>
+
+                    .zbj:hover .kp .logo .logo-q5 {<br>
+                    transform: translate3d(0, 0, 60px);<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <!-- <div class="js">
+            <div class="lb-wz">js</div>
+            <div class="dm">
+                <p></p>
+            </div>
+        </div> -->
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <!-- <li class="menu-item">
+                <i class="fa fa-solid fa-share"></i>
+                <span>分享</span>
+            </li>
+            <li class="menu-item">
+                <i class="fa fa-solid fa-trash"></i>
+                <span>删除</span>
+            </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习三</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* margin: 3px; */
+            /* border: 1px solid black; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: #fdffeb;
+            position: relative;
+            top: 15vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0;
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 总布局 */
+        .zbj {
+            display: flex;
+            flex-wrap: wrap;
+            width: 14em;
+            align-items: center;
+            justify-content: center;
+            z-index: -1;
+        }
+
+        .zbj-fh {
+            position: absolute;
+            border-radius: 10px;
+            transform: rotate(90deg);
+            width: 11em;
+            height: 11em;
+            background: linear-gradient(270deg, #03a9f4, #cc39a4, #ffb5d2);
+            z-index: -2;
+            box-shadow: inset 0px 0px 180px 5px #ffffff;
+        }
+
+        /* 卡片 */
+        .kp {
+            width: 60px;
+            height: 60px;
+            border-top-left-radius: 10px;
+            background: lightgrey;
+            transition: .4s ease-in-out, .2s background-color ease-in-out, .2s background-image ease-in-out;
+            background: rgba(255, 255, 255, 0.596);
+            backdrop-filter: blur(5px);
+            border: 1px solid transparent;
+            -webkit-backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* 文字 */
+        .wz {
+            position: absolute;
+            font-size: 1em;
+            transition: .4s ease-in-out;
+            color: rgb(61, 61, 61);
+            text-align: center;
+            font-weight: bold;
+            z-index: 3;
+        }
+
+        /* 各个卡片常态样式 */
+        .kp:nth-child(1) .tiktok {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: #000000;
+        }
+
+        .kp:nth-child(2) {
+            border-radius: 0px;
+        }
+
+        .kp:nth-child(2) .codepen {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: #03A9F4;
+        }
+
+        .kp:nth-child(3) {
+            border-top-right-radius: 10px;
+            border-top-left-radius: 0px;
+        }
+
+        .kp:nth-child(3) .unity {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: rgb(50, 239, 135);
+        }
+
+        .kp:nth-child(4) {
+            border-radius: 0px;
+        }
+
+        .kp:nth-child(4) .github {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: #000000;
+        }
+
+        .kp:nth-child(5) {
+            border-radius: 0px;
+        }
+
+        .kp:nth-child(5) .qq {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: #03A9F4;
+        }
+
+        .kp:nth-child(6) {
+            border-radius: 0px;
+        }
+
+        .kp:nth-child(6) .cloud {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: rgb(50, 239, 135);
+        }
+
+        .kp:nth-child(7) {
+            border-bottom-left-radius: 10px;
+            border-top-left-radius: 0px;
+        }
+
+        .kp:nth-child(7) .css3 {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: black;
+        }
+
+        .kp:nth-child(8) {
+            border-radius: 0px;
+        }
+
+        .kp:nth-child(8) .bilibili {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: #29b6f6;
+        }
+
+        .kp:nth-child(9) {
+            border-radius: 0px;
+        }
+
+        .kp:nth-child(9) .weixin {
+            opacity: 0;
+            transition: .2s ease-in-out;
+            color: rgb(50, 239, 135);
+        }
+
+        .zbj:hover {
+            width: 14em;
+            cursor: pointer;
+        }
+
+        .zbj:hover .zbj-fh {
+            opacity: 0;
+        }
+
+        .zbj:hover .kp {
+            margin: .2em;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .zbj:hover .kp:nth-child(5) {
+            border: transparent;
+        }
+
+        .zbj:hover .wz {
+            opacity: 0;
+            z-index: -3;
+        }
+
+
+
+        .zbj:hover .tiktok {
+            opacity: 1;
+        }
+
+        .zbj:hover .codepen {
+            opacity: 1;
+        }
+
+        .zbj:hover .unity {
+            opacity: 1;
+        }
+
+        .zbj:hover .github {
+            opacity: 1;
+        }
+
+        .zbj:hover .qq {
+            opacity: 1;
+        }
+
+        .zbj:hover .cloud {
+            opacity: 1;
+        }
+
+        .zbj:hover .css3 {
+            opacity: 1;
+        }
+
+        .zbj:hover .bilibili {
+            opacity: 1;
+        }
+
+        .zbj:hover .weixin {
+            opacity: 1;
+        }
+
+        .kp:nth-child(1):hover {
+            background-color: #000000;
+        }
+
+        .kp:nth-child(1):hover .tiktok {
+            color: white;
+        }
+
+        .kp:nth-child(2):hover {
+            background-color: #03A9F4;
+        }
+
+        .kp:nth-child(2):hover .codepen {
+            color: white;
+        }
+
+        .kp:nth-child(3):hover {
+            background-color: #8c9eff;
+        }
+
+        .kp:nth-child(3):hover .unity {
+            color: white;
+        }
+
+        .kp:nth-child(4):hover {
+            background-color: #1E1F26;
+        }
+
+        .kp:nth-child(4):hover .github {
+            color: white;
+        }
+
+        .kp:nth-child(5):hover {
+            background-color: #29b6f6;
+        }
+
+        .kp:nth-child(5):hover .qq {
+            color: white;
+        }
+
+        .kp:nth-child(6):hover {
+            background-color: #8c9eff;
+        }
+
+        .kp:nth-child(6):hover .cloud {
+            color: white;
+        }
+
+        .kp:nth-child(7):hover {
+            background-color: black;
+        }
+
+        .kp:nth-child(7):hover .css3 {
+            color: white;
+        }
+
+        .kp:nth-child(8):hover {
+            background-color: #29b6f6;
+        }
+
+        .kp:nth-child(8):hover .bilibili {
+            color: white;
+        }
+
+        .kp:nth-child(9):hover {
+            background-color: #8c9eff;
+        }
+
+        .kp:nth-child(9):hover .weixin {
+            color: white;
+        }
+    </style>
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <!-- 主体部分 -->
+    <div>
+        <div class="zbj">
+            <div class="kp">
+                <i class="fa-brands fa-tiktok tiktok"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-codepen codepen"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-unity unity"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-github github"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-qq qq"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-solid fa-cloud cloud"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-css3-alt css3"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-bilibili bilibili"></i>
+            </div>
+            <div class="kp">
+                <i class="fa-brands fa-weixin weixin"></i>
+            </div>
+            <p class="wz">悬浮<br>分裂<br>菜单</p>
+            <div class="zbj-fh"></div>
+        </div>
+    </div>
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;!-- 主体部分 --&gt;<br>
+                    &lt;div&gt;<br>
+                    &lt;div class="zbj"&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-tiktok tiktok"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-codepen codepen"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-unity unity"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-github github"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-qq qq"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-solid fa-cloud cloud"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-css3-alt css3"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-bilibili bilibili"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;i class="fa-brands fa-weixin weixin"&gt;&lt;/i&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;p class="wz"&gt;悬浮&lt;br&gt;分裂&lt;br&gt;菜单&lt;/p&gt;<br>
+                    &lt;div class="zbj-fh"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    *{<br>
+                    font-family: monospace;<br>
+                    font-size:16px;<br>
+                    }<br>
+                    body {<br>
+                    background-color: #fdffeb;<br>
+                    position: relative;<br>
+                    top: 15vh;<br>
+                    display: flex;<br>
+                    align-items: center;<br>
+                    justify-content: center;<br>
+                    flex-direction: column;<br>
+                    margin: 0;<br>
+                    }<br>
+                    /* 总布局 */<br>
+                    .zbj {<br>
+                    display: flex;<br>
+                    flex-wrap: wrap;<br>
+                    width: 14em;<br>
+                    align-items: center;<br>
+                    justify-content: center;<br>
+                    z-index: -1;<br>
+                    }<br>
+
+                    .zbj-fh {<br>
+                    position: absolute;<br>
+                    border-radius: 10px;<br>
+                    transform: rotate(90deg);<br>
+                    width: 11em;<br>
+                    height: 11em;<br>
+                    background: linear-gradient(270deg, #03a9f4, #cc39a4, #ffb5d2);<br>
+                    z-index: -2;<br>
+                    box-shadow: inset 0px 0px 180px 5px #ffffff;<br>
+                    }<br>
+
+                    /* 卡片 */<br>
+                    .kp {<br>
+                    width: 60px;<br>
+                    height: 60px;<br>
+                    border-top-left-radius: 10px;<br>
+                    background: lightgrey;<br>
+                    transition: .4s ease-in-out,<br>
+                    .2s background-color ease-in-out,<br>
+                    .2s background-image ease-in-out;<br>
+                    background: rgba(255, 255, 255, 0.596);<br>
+                    backdrop-filter: blur(5px);<br>
+                    border: 1px solid transparent;<br>
+                    -webkit-backdrop-filter: blur(5px);<br>
+                    display: flex;<br>
+                    align-items: center;<br>
+                    justify-content: center;<br>
+                    }<br>
+
+                    /* 文字 */<br>
+                    .wz {<br>
+                    position: absolute;<br>
+                    font-size: 1em;<br>
+                    transition: .4s ease-in-out;<br>
+                    color: rgb(61, 61, 61);<br>
+                    text-align: center;<br>
+                    font-weight: bold;<br>
+                    z-index: 3;<br>
+                    }<br>
+
+                    /* 各个卡片常态样式 */<br>
+                    .kp:nth-child(1) .tiktok {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: #000000;<br>
+                    }<br>
+
+                    .kp:nth-child(2) {<br>
+                    border-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(2) .codepen {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: #03A9F4;<br>
+                    }<br>
+
+                    .kp:nth-child(3) {<br>
+                    border-top-right-radius: 10px;<br>
+                    border-top-left-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(3) .unity {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: rgb(50, 239, 135);<br>
+                    }<br>
+
+                    .kp:nth-child(4) {<br>
+                    border-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(4) .github {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: #000000;<br>
+                    }<br>
+
+                    .kp:nth-child(5) {<br>
+                    border-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(5) .qq {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: #03A9F4;<br>
+                    }<br>
+
+                    .kp:nth-child(6) {<br>
+                    border-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(6) .cloud {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: rgb(50, 239, 135);<br>
+                    }<br>
+
+                    .kp:nth-child(7) {<br>
+                    border-bottom-left-radius: 10px;<br>
+                    border-top-left-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(7) .css3 {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: black;<br>
+                    }<br>
+
+                    .kp:nth-child(8) {<br>
+                    border-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(8) .bilibili {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: #29b6f6;<br>
+                    }<br>
+
+                    .kp:nth-child(9) {<br>
+                    border-radius: 0px;<br>
+                    }<br>
+
+                    .kp:nth-child(9) .weixin {<br>
+                    opacity: 0;<br>
+                    transition: .2s ease-in-out;<br>
+                    color: rgb(50, 239, 135);<br>
+                    }<br>
+
+                    .zbj:hover {<br>
+                    width: 14em;<br>
+                    cursor: pointer;<br>
+                    }<br>
+
+                    .zbj:hover .zbj-fh {<br>
+                    opacity: 0;<br>
+                    }<br>
+
+                    .zbj:hover .kp {<br>
+                    margin: .2em;<br>
+                    border-radius: 10px;<br>
+                    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);<br>
+                    border: 1px solid rgba(255, 255, 255, 0.3);<br>
+                    background: rgba(255, 255, 255, 0.2);<br>
+                    }<br>
+
+                    .zbj:hover .kp:nth-child(5) {<br>
+                    border: transparent;<br>
+                    }<br>
+
+                    .zbj:hover .wz {<br>
+                    opacity: 0;<br>
+                    z-index: -3;<br>
+                    }<br>
+
+
+
+                    .zbj:hover .tiktok {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .codepen {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .unity {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .github {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .qq {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .cloud {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .css3 {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .bilibili {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .zbj:hover .weixin {<br>
+                    opacity: 1;<br>
+                    }<br>
+
+                    .kp:nth-child(1):hover {<br>
+                    background-color: #000000;<br>
+                    }<br>
+
+                    .kp:nth-child(1):hover .tiktok {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(2):hover {<br>
+                    background-color: #03A9F4;<br>
+                    }<br>
+
+                    .kp:nth-child(2):hover .codepen {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(3):hover {<br>
+                    background-color: #8c9eff;<br>
+                    }<br>
+
+                    .kp:nth-child(3):hover .unity {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(4):hover {<br>
+                    background-color: #1E1F26;<br>
+                    }<br>
+
+                    .kp:nth-child(4):hover .github {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(5):hover {<br>
+                    background-color: #29b6f6;<br>
+                    }<br>
+
+                    .kp:nth-child(5):hover .qq {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(6):hover {<br>
+                    background-color: #8c9eff;<br>
+                    }<br>
+
+                    .kp:nth-child(6):hover .cloud {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(7):hover {<br>
+                    background-color: black;<br>
+                    }<br>
+
+                    .kp:nth-child(7):hover .css3 {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(8):hover {<br>
+                    background-color: #29b6f6;<br>
+                    }<br>
+
+                    .kp:nth-child(8):hover .bilibili {<br>
+                    color: white;<br>
+                    }<br>
+
+                    .kp:nth-child(9):hover {<br>
+                    background-color: #8c9eff;<br>
+                    }<br>
+
+                    .kp:nth-child(9):hover .weixin {<br>
+                    color: white;<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <!-- <div class="js">
+                    <div class="lb-wz">js</div>
+                    <div class="dm">
+                        <p></p>
+                    </div>
+                </div> -->
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <!-- <li class="menu-item">
+                                <i class="fa fa-solid fa-share"></i>
+                                <span>分享</span>
+                            </li>
+                            <li class="menu-item">
+                                <i class="fa fa-solid fa-trash"></i>
+                                <span>删除</span>
+                            </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>

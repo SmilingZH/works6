@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习一</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <!-- 全局样式 -->
+    <style>
+        * {
+            /* margin: 3px; */
+            /* border: 1px solid black; */
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            top: 15vh;
+            margin: 0;
+            background-color: rgb(255, 223, 252);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 总布局 */
+        .zbj {
+            /* transform: scale(2); */
+            width: 145px;
+            height: 150px;
+            perspective: 500px;
+        }
+
+        /* 卡片样式 */
+        .kp {
+            height: 100%;
+            border-radius: 20px;
+            /* 线性渐变 */
+            background: linear-gradient(135deg, rgb(0, 255, 214) 0%, rgb(8, 226, 96) 100%);
+            /* 曲线动画，快进ease-in快出ease-out，all（应用于所有动画） */
+            transition: all 0.5s ease-in-out;
+            transform-style: preserve-3d;
+            box-shadow: rgba(5, 71, 17, 0) 20px 25px 12.5px -20px, rgba(5, 71, 17, 0.2) 0px 12.5px 12.5px -2.5px;
+        }
+
+        /* 玻璃样式 */
+        .bl {
+            transform-style: preserve-3d;
+            position: absolute;
+            /* inset=top,right,buttom,left上，右，下，左 */
+            inset: 4px;
+            border-radius: 27.5px;
+            border-top-right-radius: 100%;
+            background: linear-gradient(0deg, rgba(255, 255, 255, 0.349) 0%, rgba(255, 255, 255, 0.815) 100%);
+            /* 为后面的图形加效果，blur模糊，用于毛玻璃，-webkit旧版兼容 */
+            -webkit-backdrop-filter: blur(2.5px);
+            backdrop-filter: blur(2.5px);
+            /* x，y，z */
+            transform: translate3d(0px, 0px, 12.5px);
+            border-left: 1px solid white;
+            border-bottom: 1px solid white;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* 文字内容 */
+        .nr {
+            padding: 50px 30px 0px 15px;
+            transform: translate3d(0, 0, 13px);
+        }
+
+        /* 内容-标题 */
+        .nr-bt {
+            display: block;
+            color: #00894d;
+            font-weight: 450;
+            font-size: 10px;
+        }
+
+        /* 内容-正文 */
+        .nr-zw {
+            display: block;
+            color: rgba(0, 137, 78, 0.7647058824);
+            font-size: 7.5px;
+            margin-top: 10px;
+        }
+
+        /* 软件图标 */
+        .tb {
+            padding: 5px 5px;
+            transform-style: preserve-3d;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transform: translate3d(0, 0, 13px);
+        }
+
+        /* 图标布局 */
+        .tb-bj {
+            display: flex;
+            gap: 5px;
+            transform-style: preserve-3d;
+        }
+
+        /* 图标样式 */
+        .tb-ys {
+            width: 15px;
+            height: 15px;
+            padding: 2.5px;
+            background: rgb(255, 255, 255);
+            border-radius: 50%;
+            border: none;
+            display: grid;
+            place-content: center;
+            box-shadow: rgba(5, 71, 17, 0.5) 0px 3.5px 2.5px -2.5px;
+        }
+
+        .tb-ys span i {
+            font-size: 8px;
+        }
+
+        /* 设置图标布局中第一个图标样式过度 */
+        .tb-ys:first-child {
+            transition: transform 0.2s ease-in-out 0.4s, box-shadow 0.2s ease-in-out 0.4s;
+        }
+
+        /* 第二个 */
+        .tb-ys:nth-child(2) {
+            transition: transform 0.2s ease-in-out 0.6s, box-shadow 0.2s ease-in-out 0.6s;
+        }
+
+        /* 第三个 */
+        .tb-ys:nth-child(3) {
+            transition: transform 0.2s ease-in-out 0.8s, box-shadow 0.2s ease-in-out 0.8s;
+        }
+
+        .tb-ys span {
+            font-size: 8px;
+            color: #00894d;
+        }
+
+        .tb-ys:hover {
+            background: black;
+        }
+
+        .tb-ys:hover span {
+            color: white;
+        }
+
+        /* 鼠标按下未松开时的样式 */
+        .tb-ys:active {
+            background: rgb(255, 234, 0);
+        }
+
+        .tb-ys:active span {
+            color: black;
+        }
+
+        /* logo */
+        .logo {
+            position: absolute;
+            right: 0;
+            top: 0;
+            transform-style: preserve-3d;
+        }
+
+        /* logo下面的圈 */
+        .logo-q {
+            display: block;
+            position: absolute;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            top: 0;
+            right: 0;
+            box-shadow: rgba(100, 100, 111, 0.2) -5px 5px 10px 0px;
+            -webkit-backdrop-filter: blur(2.5px);
+            backdrop-filter: blur(2.5px);
+            background: rgba(0, 249, 203, 0.2);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .logo-q1 {
+            width: 85px;
+            transform: translate3d(0, 0, 10px);
+            top: 4px;
+            right: 4px;
+        }
+
+        .logo-q2 {
+            width: 70px;
+            transform: translate3d(0, 0, 20px);
+            top: 5px;
+            right: 5px;
+            -webkit-backdrop-filter: blur(0.5px);
+            backdrop-filter: blur(0.5px);
+            transition-delay: 0.4s;
+        }
+
+        .logo-q3 {
+            width: 55px;
+            transform: translate3d(0, 0, 30px);
+            top: 8.5px;
+            right: 8.5px;
+            transition-delay: 0.8s;
+        }
+
+        .logo-q4 {
+            width: 40px;
+            transform: translate3d(0, 0, 40px);
+            top: 11.5px;
+            right: 11.5px;
+            transition-delay: 1.2s;
+        }
+
+        .logo-q5 {
+            width: 25px;
+            transform: translate3d(0, 0, 50px);
+            top: 15px;
+            right: 15px;
+            display: grid;
+            place-content: center;
+            transition-delay: 1.6s;
+        }
+
+        /* 卡片悬停样式 */
+        .zbj:hover .kp {
+            transform: rotate3d(1, 1, 0, 30deg);
+            box-shadow: rgba(5, 71, 17, 0.3) 15px 25px 12.5px -20px, rgba(5, 71, 17, 0.1) 0px 12.5px 15px 0px;
+        }
+
+        .zbj:hover .kp .tb-ys {
+            transform: translate3d(0, 0, 25px);
+            box-shadow: rgba(5, 71, 17, 0.2) -2.5px 10px 5px 0px;
+        }
+
+        /* logo圈悬停样式 */
+        .zbj:hover .kp .logo .logo-q2 {
+            transform: translate3d(0, 0, 30px);
+        }
+
+        .zbj:hover .kp .logo .logo-q3 {
+            transform: translate3d(0, 0, 40px);
+        }
+
+        .zbj:hover .kp .logo .logo-q4 {
+            transform: translate3d(0, 0, 50px);
+        }
+
+        .zbj:hover .kp .logo .logo-q5 {
+            transform: translate3d(0, 0, 60px);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主体样式 -->
+    <div class="zbj">
+        <div class="kp">
+            <!-- logo，圈 -->
+            <div class="logo">
+                <span class="logo-q logo-q1"></span>
+                <span class="logo-q logo-q2"></span>
+                <span class="logo-q logo-q3"></span>
+                <span class="logo-q logo-q4"></span>
+                <span class="logo-q logo-q5">
+                    <i class="fa-solid fa-user " style="color: #ffffff;transform: scale(.8);"></i>
+                </span>
+            </div>
+            <!-- 毛玻璃 -->
+            <div class="bl"></div>
+            <!-- 文字内容 -->
+            <div class="nr">
+                <span class="nr-bt">练习一 (3D UI)</span>
+                <span class="nr-zw">使用html，css制作，旋转动效以及鼠标悬停样式全部由css完成</span>
+            </div>
+            <!-- 软件图标 -->
+            <div class="tb">
+                <div class="tb-bj">
+                    <button class="tb-ys">
+                        <span>
+                            <i class="fa-brands fa-qq"></i>
+                        </span>
+                    </button>
+                    <button class="tb-ys">
+                        <span>
+                            <i class="fa-brands fa-weixin"></i>
+                        </span>
+                    </button>
+                    <button class="tb-ys">
+                        <span>
+                            <i class="fa-brands fa-bilibili"></i>
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

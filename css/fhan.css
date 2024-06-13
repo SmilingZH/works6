@@ -1,0 +1,26 @@
+/* 返回按钮样式 */
+
+/* 返回上一级按钮 */
+.anniu {
+    box-shadow: inset 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.2),
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+    margin-top: 120px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100px;
+    border: 2px solid rgb(105, 105, 105);
+    border-radius: 20px;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.anniu:hover {
+    border: 2px solid rgb(255, 255, 255);
+    background-color: rgb(29, 29, 29);
+    color: white;
+}
