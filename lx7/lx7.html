@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习七</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: rgb(255, 238, 238);
+            height: 100%;
+            margin: 0;
+            position: relative;
+            top: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            /* overflow: hidden; */
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 圆样式 */
+        .h {
+            width: 100px;
+            height: 100px;
+            outline: 2px solid rgb(120, 120, 120);
+            margin: 0 auto;
+            position: relative;
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            animation: xz linear infinite 20s;
+            /* transform: scale(.3); */
+        }
+
+        /* 卡片样式 */
+        .kp {
+            position: absolute;
+            outline: 1px solid rgb(120, 120, 120);
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+
+        }
+
+        /* 卡片中元素样式 */
+        .kp-a {
+            height: 100%;
+            width: 100%;
+            animation: xz 20s linear infinite reverse;
+        }
+
+        /* 旋转动画 */
+        @keyframes xz {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主体样式 -->
+    <div class="h">
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+    </div>
+    <!-- 主体js -->
+    <script>
+        //获取所有元素'kp'
+        const kp = document.querySelectorAll('.h .kp');
+        //获取半径
+        const r = document.querySelector('.h').clientWidth / 2;
+        //读取元素数量
+        const sl = kp.length;
+        //获取每一个元素旋转的角度
+        const jd = 360 / sl;
+        for (let i = 0; i < sl; i++) {
+            let t = i * jd;
+            //转换弧度制
+            t = (Math.PI / 180) * t;
+            //利用三角函数计算
+            const x = Math.sin(t) * r,
+                y = -Math.cos(t) * r;
+            //进行平移变换
+            //``此处为反引号，引用ES6的写法，允许创建包含表达式和字符串
+            kp[i].style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+</body>
+
+</html>

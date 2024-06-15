@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习七</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+        body {
+            background-color: rgb(255, 238, 238);
+            height: 100%;
+            margin: 0;
+            position: relative;
+            top: 5vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        /* 圆样式 */
+        .h {
+            width: 200px;
+            height: 200px;
+            outline: 4px solid rgb(120, 120, 120);
+            margin: 0 auto;
+            position: relative;
+            margin-top: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            animation: xz linear infinite 20s;
+            /* transform: scale(.3); */
+        }
+
+        /* 卡片样式 */
+        .kp {
+            position: absolute;
+            outline: 2px solid rgb(120, 120, 120);
+            height: 80px;
+            width: 80px;
+            border-radius: 50%;
+
+        }
+
+        /* 卡片中元素样式 */
+        .kp-a {
+            height: 100%;
+            width: 100%;
+            animation: xz 20s linear infinite reverse;
+        }
+
+        /* 旋转动画 */
+        @keyframes xz {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <!-- 主体部分 -->
+    <div class="h">
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+        <div class="kp">
+            <div class="kp-a"></div>
+        </div>
+    </div>
+    <!-- 主体js -->
+    <script>
+        //获取所有元素'kp'
+        const kp = document.querySelectorAll('.h .kp');
+        //获取半径
+        const r = document.querySelector('.h').clientWidth / 2;
+        //读取元素数量
+        const sl = kp.length;
+        //获取每一个元素旋转的角度
+        const jd = 360 / sl;
+        for (let i = 0; i < sl; i++) {
+            let t = i * jd;
+            //转换弧度制
+            t = (Math.PI / 180) * t;
+            //利用三角函数计算
+            const x = Math.sin(t) * r,
+                y = -Math.cos(t) * r;
+            //进行平移变换
+            //``此处为反引号，引用ES6的写法，允许创建包含表达式和字符串
+            kp[i].style.transform = `translate(${x}px, ${y}px)`;
+        }
+    </script>
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;!-- 主体部分 --&gt;<br>
+                    &lt;div class="h"&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;div class="kp-a"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;div class="kp-a"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;div class="kp-a"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;div class="kp-a"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;div class="kp-a"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="kp"&gt;<br>
+                    &lt;div class="kp-a"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    * {<br>
+                    font-family: monospace;<br>
+                    font-size: 16px;<br>
+                    }<br>
+
+                    body {<br>
+                    background-color: rgb(255, 238, 238);<br>
+                    height: 100%;<br>
+                    margin: 0;<br>
+                    position: relative;<br>
+                    top: 5vh;<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    flex-direction: column;<br>
+                    }<br>
+
+                    /* 圆样式 */<br>
+                    .h {<br>
+                    width: 200px;<br>
+                    height: 200px;<br>
+                    outline: 4px solid rgb(120, 120, 120);<br>
+                    margin: 0 auto;<br>
+                    position: relative;<br>
+                    margin-top: 60px;<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    border-radius: 50%;<br>
+                    animation: xz linear infinite 20s;<br>
+                    /* transform: scale(.3); */<br>
+                    }<br>
+
+                    /* 卡片样式 */<br>
+                    .kp {<br>
+                    position: absolute;<br>
+                    outline: 2px solid rgb(120, 120, 120);<br>
+                    height: 80px;<br>
+                    width: 80px;<br>
+                    border-radius: 50%;<br>
+                    }<br>
+
+                    /* 卡片中元素样式 */<br>
+                    .kp-a {<br>
+                    height: 100%;<br>
+                    width: 100%;<br>
+                    animation: xz 20s linear infinite reverse;<br>
+                    }<br>
+
+                    /* 旋转动画 */<br>
+                    @keyframes xz {<br>
+                    to {<br>
+                    transform: rotate(360deg);<br>
+                    }<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <div class="js">
+            <div class="lb-wz">js</div>
+            <div class="dm">
+                <p id="fz-js">
+                    //获取所有元素'kp'<br>
+                    const kp = document.querySelectorAll('.h .kp');<br>
+                    //获取半径<br>
+                    const r = document.querySelector('.h').clientWidth / 2;<br>
+                    //读取元素数量<br>
+                    const sl = kp.length;<br>
+                    //获取每一个元素旋转的角度<br>
+                    const jd = 360 / sl;<br>
+                    for (let i = 0; i &lt; sl; i++) {<br>
+                    let t=i * jd;<br>
+                    //转换弧度制<br>
+                    t=(Math.PI / 180) * t;<br>
+                    //利用三角函数计算<br>
+                    const x=Math.sin(t) * r,<br>
+                    y=-Math.cos(t) * r;<br>
+                    //进行平移变换<br>
+                    //``此处为反引号，引用ES6的写法，允许创建包含表达式和字符串<br>
+                    kp[i].style.transform=`translate(${x}px, ${y}px)`; <br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_js()">复制js</span>
+            </li>
+            <!-- <li class="menu-item">
+                <i class="fa fa-solid fa-trash"></i>
+                <span>删除</span>
+            </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>
