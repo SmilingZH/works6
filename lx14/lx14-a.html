@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习八</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 16px;
+            /* border: 1px solid red; */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: hsl(188, 100%, 90%);
+            /* overflow: hidden; */
+            flex-direction: column;
+        }
+
+        iframe {
+            position: relative;
+            top: 3vh;
+            border-radius: 20px;
+            box-shadow:
+                inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+                2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+                -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <div>
+        <iframe src="lx14.html" frameborder="0" width="400px" height="300px" sandbox></iframe>
+    </div>
+    <!-- 主体js -->
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;form&gt;<br>
+                    &lt;label for="name"&gt;姓名：&lt;/label&gt;<br>
+                    &lt;input type="text" id="name" name="name"&gt;&lt;br&gt;&lt;br&gt;<br>
+                    &lt;label for="email"&gt;邮箱：&lt;/label&gt;<br>
+                    &lt;input type="email" id="email" name="email"&gt;&lt;br&gt;&lt;br&gt;<br>
+                    &lt;input type="submit" value="提交"&gt;<br>
+                    &lt;/form&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <!-- <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+
+                </p>
+            </div>
+        </div> -->
+        <!-- js部分 -->
+        <!-- <div class="js">
+            <div class="lb-wz">js</div>
+            <div class="dm">
+                <p id="fz-js">
+                    
+                </p>
+            </div>
+        </div> -->
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <!-- <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_js()">复制js</span>
+            </li> -->
+            <!-- <li class="menu-item">
+                    <i class="fa fa-solid fa-trash"></i>
+                    <span>删除</span>
+                </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>
