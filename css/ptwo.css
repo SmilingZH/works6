@@ -13,8 +13,15 @@ body {
 .toubu {
     height: 40px;
     display: flex;
+    margin-left: 15%;
+    margin-right: 15%;
+    border-radius: 20px;
     justify-content: center;
     align-items: center;
+    box-shadow:
+        inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+        2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+        -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
 }
 
 /* 打字效果样式 */
