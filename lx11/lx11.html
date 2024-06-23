@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习十一</title>
+    <style>
+        * {
+
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #222;
+            transform: scale(.25);
+        }
+
+        .zigzag {
+            /* 设置位置是绝对的，是让上下两个zigzag完全重叠 */
+            position: absolute;
+            display: flex;
+            gap: 38px;
+        }
+
+        .zigzag:nth-child(2) {
+            /* 水平旋转180度，以便动线是从两端同时开始 */
+            transform: rotate(180deg);
+        }
+
+        .zigzag div {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            display: block;
+            transform: rotate(315deg);
+            overflow: hidden;
+        }
+
+        .zigzag div::before {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 2px;
+            transform: translateX(-100%);
+            background: linear-gradient(90deg, transparent, #0f0);
+            animation: animateBefore 6s linear infinite;
+            animation-delay: calc(var(--i) * 1s);
+        }
+
+        @keyframes animateBefore {
+            0% {
+                transform: translateX(-100%);
+            }
+
+            /* 1/6 = 16.67% */
+            16.67%,
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .zigzag div::after {
+            position: absolute;
+            content: "";
+            right: 0;
+            width: 2px;
+            height: 100%;
+            transform: translateY(-100%);
+            background: linear-gradient(180deg, transparent, #0f0);
+            animation: animateAfter 6s linear infinite;
+            animation-delay: calc(var(--i) * 1s);
+        }
+
+        @keyframes animateAfter {
+
+            /* 1/6/2 = 8.33% */
+            0%,
+            8.33% {
+                transform: translateY(-100%);
+            }
+
+            25%,
+            100% {
+                transform: translateY(100%);
+            }
+        }
+
+        .zigzag div span {
+            position: absolute;
+            inset: 10px;
+            background: #292929;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #000;
+        }
+
+        .zigzag div span b {
+            color: #fff;
+            font-weight: normal;
+            /* 将文字转到正向 */
+            transform: rotate(45deg);
+            font-size: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="zigzag">
+        <div style="--i: 0"><span><b>❤</b></span></div>
+        <div style="--i: 1"><span><b>流</b></span></div>
+        <div style="--i: 2"><span><b>动</b></span></div>
+        <div style="--i: 3"><span><b>边</b></span></div>
+        <div style="--i: 4"><span><b>框</b></span></div>
+        <div style="--i: 5"><span><b>❤</b></span></div>
+    </div>
+    <div class="zigzag">
+        <div style="--i: 0"></div>
+        <div style="--i: 1"></div>
+        <div style="--i: 2"></div>
+        <div style="--i: 3"></div>
+        <div style="--i: 4"></div>
+        <div style="--i: 5"></div>
+    </div>
+</body>
+
+</html>

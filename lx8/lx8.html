@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习八</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #393c40;
+            overflow: hidden;
+        }
+    </style>
+    <!-- 主体样式 -->
+    <style>
+        svg {
+            width: 0;
+            height: 0;
+        }
+
+        body {
+            /* 在CSS中，filter属性用于对元素应用图形效果，比如模糊、亮度、对比度等。
+                    url()函数在filter属性中使用时，允许您引用一个定义在SVG <filter>元素中的滤镜效果。
+                    在这个例子中，filter: url(#gooey);这行代码引用了一个ID为gooey的SVG滤镜。
+                    这个滤镜是在HTML的<svg>元素中定义的*/
+            filter: url(#gooey);
+        }
+
+        .circle {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(90deg, rgb(123, 235, 236), rgb(255, 194, 239));
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .particles {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(90deg, rgb(123, 235, 236), rgb(255, 194, 239));
+            z-index: -1;
+        }
+
+        @keyframes animate {
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                /* 引用随机坐标【--x，--y】 */
+                transform: translate(var(--x), var(--y));
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 主体部分 -->
+    <div class="circle"></div>
+    <svg>
+        <!-- 这里定义了一个名为gooey的滤镜，它包含两个滤镜操作：
+            1、feGaussianBlur：这个操作会对源图形应用高斯模糊效果，
+                stdDeviation属性设置了模糊的强度，数值越大，模糊效果越明显。
+            2、feColorMatrix：这个操作会对颜色进行矩阵变换，用于改变源图形的每个像素的颜色值。
+                在这个矩阵中，前三个通道（红、绿、蓝）的值被设置为1，这意味着颜色值不会改变。
+                第四行的最后两个值0 0 0 50 -10用于改变透明度通道，增加颜色的不透明度，并减小透明度，
+                从而创建一种颜色浓度和透明度的变化效果，给人一种粘稠的感觉。
+        当filter: url(#gooey);这行代码应用于一个元素时，它会将gooey滤镜的效果应用到该元素上，使得元素的边缘看起来模糊和透明，就像液体一样。
+        在这个例子中，滤镜被应用于整个页面，使得页面上所有的元素都呈现出这种粘稠的视觉效果。 -->
+        <filter id="gooey">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="5" />
+            <feColorMatrix values="
+            1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0 0 0 50 -10" />
+        </filter>
+    </svg>
+    <!-- 主体js -->
+    <script>
+        let circle = document.querySelector('.circle'); // 1. 选择类名为 'circle' 的元素
+        circle.addEventListener('click', function () { // 2. 为这个元素添加点击事件监听器
+            for (let i = 0; i < 50; i++) { // 3. 执行一个循环，循环50次
+                let particles = document.createElement('i'); // 4. 创建一个新的 'i' 元素，代表一个粒子
+                particles.classList.add('particles'); // 5. 为这个粒子元素添加 'particles' 类
+
+                let randomX = (Math.random() - 0.5) * window.innerWidth; // 6. 计算随机的 X 坐标
+                let randomY = (Math.random() - 0.5) * window.innerHeight; // 7. 计算随机的 Y 坐标
+
+                particles.style.setProperty('--x', randomX + 'px'); // 8. 设置 CSS 变量 '--x'，用于动画的 X 移动
+                particles.style.setProperty('--y', randomY + 'px'); // 9. 设置 CSS 变量 '--y'，用于动画的 Y 移动
+
+                let randonSize = Math.random() * 10 + 10; // 10. 计算随机的粒子大小
+                particles.style.width = randonSize + 'px'; // 11. 设置粒子的宽度
+                particles.style.height = randonSize + 'px'; // 12. 设置粒子的高度
+
+                let duration = Math.random() * 3 + 2; // 13. 计算随机的动画持续时间
+                particles.style.animation = `animate ${duration}s ease infinite`; // 14. 设置动画属性
+
+                document.body.appendChild(particles); // 15. 将粒子元素添加到 body 元素中
+
+                setTimeout(function () { // 16. 设置一个定时器
+                    particles.remove(); // 17. 在定时器结束时移除粒子元素
+                }, 10000); // 18. 定时器设置为 10000 毫秒（10秒）
+            }
+        });
+        // 1、选择元素：首先，通过document.querySelector选择类名为circle的元素，并将其存储在变量circle中。
+        // 2、添加事件监听器：为circle元素添加一个点击事件监听器。当这个元素被点击时，将执行一个匿名函数。
+        // 3、循环创建粒子：在函数内部，使用for循环来创建50个粒子。循环变量i从0开始，每次迭代增加1，直到达到50。
+        // 4、创建粒子元素：在每次循环中，创建一个新的i元素，这个元素将代表一个粒子。
+        // 5、添加类名：为新建的粒子元素添加particles类，这个类在CSS中定义了粒子的基本样式。
+        // 6、计算随机位置：计算一个随机的X坐标和Y坐标，用于粒子动画的起始位置。Math.random()生成一个0到1之间的随机数，乘以窗口的宽度或高度，再减去0.5，以确保粒子可以在窗口内的任何位置出现。
+        // 7、设置CSS变量：使用style.setProperty方法为粒子元素设置CSS变量--x和--y，这些变量将在CSS动画中用于控制粒子的移动。
+        // 8、设置粒子大小：计算一个随机的粒子大小，并将其应用于粒子的宽度和高度。
+        // 9、设置动画属性：为粒子元素设置一个随机的动画持续时间，以及动画的关键帧名称animate。这样每个粒子都会有不同的动画持续时间和起始位置。
+        // 10、添加粒子到文档：将粒子元素添加到document.body中，使其在页面上可见。
+        // 11、设置定时器移除粒子：使用setTimeout设置一个定时器，当定时器结束时，移除对应的粒子元素。这样粒子在页面上只会存在一段时间，然后消失。
+        // 12、整个JavaScript部分的逻辑主要是监听点击事件，然后在事件发生时创建一系列的粒子元素，并给它们设置随机的位置、大小和动画。这些粒子会在页面上移动一段时间后消失，从而创建一个动态的视觉效果。
+    </script>
+</body>
+
+</html>

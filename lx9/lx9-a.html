@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习八</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 16px;
+            /* border: 1px solid red; */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: hsl(188, 100%, 90%);
+            /* overflow: hidden; */
+            flex-direction: column;
+        }
+
+        iframe {
+            position: relative;
+            top: 3vh;
+            border-radius: 20px;
+            box-shadow:
+                inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+                2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+                -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <div>
+        <iframe src="lx9.html" frameborder="0" width="400px" height="300px"></iframe>
+    </div>
+    <!-- 主体js -->
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;div class="wrapper"&gt;<br>
+                    &lt;div class="itemLeft item1"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item2"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item3"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item4"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item5"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item6"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item7"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemLeft item8"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;div class="wrapper"&gt;<br>
+                    &lt;div class="itemRight item1"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item2"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item3"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item4"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item5"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item6"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item7"&gt;&lt;/div&gt;<br>
+                    &lt;div class="itemRight item8"&gt;&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    *,<br>
+                    *::before,<br>
+                    *::after {<br>
+                    box-sizing: border-box;<br>
+                    }<br>
+
+                    * {<br>
+                    margin: 0;<br>
+                    }<br>
+
+                    body {<br>
+                    background-color: #030712;<br>
+                    }<br>
+
+                    .wrapper {<br>
+                    margin-top: 2rem;<br>
+                    width: 90%;<br>
+                    max-width: 1536px;<br>
+                    margin-inline: auto;<br>
+                    height: 50px;<br>
+                    position: relative;<br>
+                    overflow: hidden;<br>
+                    mask-image: linear-gradient(to right,<br>
+                    rgba(0, 0, 0, 0),<br>
+                    rgba(0, 0, 0, 1) 20%,<br>
+                    rgba(0, 0, 0, 1) 80%,<br>
+                    rgba(0, 0, 0, 0));<br>
+                    }<br>
+
+                    @keyframes scrollLeft {<br>
+                    to {<br>
+                    left: -200px;<br>
+                    }<br>
+                    }<br>
+
+                    @keyframes scrollRight {<br>
+                    to {<br>
+                    right: -200px;<br>
+                    }<br>
+                    }<br>
+
+                    .itemLeft,<br>
+                    .itemRight {<br>
+                    width: 100px;<br>
+                    height: 50px;<br>
+                    background-color: #e11d48;<br>
+                    border-radius: 6px;<br>
+                    position: absolute;<br>
+                    animation-timing-function: linear;<br>
+                    animation-duration: 30s;<br>
+                    animation-iteration-count: infinite;<br>
+                    }<br>
+
+                    .itemLeft {<br>
+                    left: max(calc(100px * 8), 100%);<br>
+                    animation-name: scrollLeft;<br>
+                    }<br>
+
+                    .itemRight {<br>
+                    right: max(calc(100px * 8), calc(100% + 200px));<br>
+                    animation-name: scrollRight;<br>
+                    }<br>
+
+                    .item1 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 1) * -1);<br>
+                    }<br>
+
+                    .item2 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 2) * -1);<br>
+                    }<br>
+
+                    .item3 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 3) * -1);<br>
+                    }<br>
+
+                    .item4 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 4) * -1);<br>
+                    }<br>
+
+                    .item5 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 5) * -1);<br>
+                    }<br>
+
+                    .item6 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 6) * -1);<br>
+                    }<br>
+
+                    .item7 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 7) * -1);<br>
+                    }<br>
+
+                    .item8 {<br>
+                    animation-delay: calc(30s / 8 * (8 - 8) * -1);<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <!-- <div class="js">
+            <div class="lb-wz">js</div>
+            <div class="dm">
+                <p id="fz-js">
+                    
+                </p>
+            </div>
+        </div> -->
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <!-- <li class="menu-item">
+                <span onclick="fz_js()">复制js</span>
+            </li> -->
+            <!-- <li class="menu-item">
+                    <i class="fa fa-solid fa-trash"></i>
+                    <span>删除</span>
+                </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>

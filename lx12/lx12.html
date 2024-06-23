@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *,
+        *::before,
+        *::after {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            perspective: 800px;
+        }
+
+        body * {
+            transform-style: preserve-3d;
+        }
+
+        .scene {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 80vh;
+            animation: scene 45s infinite linear;
+        }
+
+        @keyframes scene {
+            from {
+                transform: rotate(0deg) rotateX(15deg) rotate(360deg);
+            }
+
+            to {
+                transform: rotate(360deg) rotateX(15deg) rotate(0deg);
+            }
+        }
+
+        .ribbon {
+            position: absolute;
+        }
+
+        .ribbon i {
+            position: absolute;
+            inset: -1.5em -0.5em;
+            overflow: hidden;
+            transform: translate(var(--tx, 0),
+                    var(--ty, 0)) rotateY(var(--ry, 0deg)) translateZ(calc(0.5em / tan(4.5deg))) skewY(5deg) scaleX(1.02);
+            --bgColor: hsl(200 100% var(--fadeLight));
+            --color: hsl(200 100% calc(var(--fadeLight) * 1.5));
+        }
+
+        .ribbon i::after {
+            content: "日落松风起，还家草露晞。云光侵履迹，山翠拂人衣";
+            position: absolute;
+            display: grid;
+            place-items: center;
+            top: 50%;
+            left: var(--left);
+            width: 36em;
+            height: 100%;
+            color: var(--color);
+            font-size: 2em;
+            background-image: linear-gradient(-60deg, transparent 1em,
+                    var(--bgColor)0 31em, transparent 0),
+                linear-gradient(60deg, transparent 1em,
+                    var(--bgColor) 0 31em, transparent 0);
+            font-style: normal;
+            text-shadow: 0 0 0.1em #0007;
+            animation: text 16s infinite ease-in-out;
+        }
+
+        @keyframes text {
+            0% {
+                translate: 0em -50%;
+            }
+
+            45% {
+                translate: -49.5em -50%;
+            }
+
+            55% {
+                translate: -47em -50%;
+            }
+
+            100% {
+                translate: -96.5em -50%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 场景容器 -->
+    <div class="scene">
+        <!-- 彩带 -->
+        <div class="ribbon">
+        </div>
+    </div>
+    <script>
+        // 获取彩带元素
+        var ribbon = document.querySelector('.ribbon');
+        // 彩带总片数
+        const itemCount = 120;
+        // 左基准值
+        const baseLeft = 0.5;
+        // y基准值
+        const baseTy = 5;
+        // x基准值
+        const baseTx = 20;
+        // 半径基准值
+        const baseRy = 0;
+        // 渐变亮度基准值
+        const baseFadeLight = 4;
+        for (let i = 0; i < itemCount; i++) {
+            const item = document.createElement('i');
+            item.style.setProperty('--left', (i + 1) * baseLeft + 'em');
+            item.style.setProperty('--ty', (baseTy - i / 12) + 'em');
+            if (i < 20) {
+                // 底部的20个元素
+                item.style.setProperty('--tx', (baseTx - i) + 'em');
+                item.style.setProperty('--fadeLight', (baseFadeLight * (i + 1)) + '%');
+            } else if (i < 100) {
+                // 中间的80个元素，每个元素都旋转9度
+                // 80 * 9 = 720度，正好是两圈
+                item.style.setProperty('--ry', (baseTx - i) * 9 + 'deg');
+                item.style.setProperty('--fadeLight', 'calc((sin(var(--ry) + 90deg) + 1) * 30% + 20%)');
+            } else {
+                // 顶部的20个元素
+                item.style.setProperty('--tx', (120 - i - baseTx) + 'em');
+                item.style.setProperty('--fadeLight', (baseFadeLight * (119 - i)) + '%');
+            }
+            ribbon.appendChild(item);
+        }
+    </script>
+</body>
+
+</html>

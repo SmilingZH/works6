@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习八</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            font-family: monospace;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* border: 1px solid red; */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #888a8b;
+            /* overflow: hidden; */
+            flex-direction: column;
+        }
+
+        iframe {
+            position: relative;
+            top: 3vh;
+            border-radius: 20px;
+            box-shadow:
+                inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+                2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+                -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <div>
+        <iframe src="lx8.html" frameborder="0" width="400px" height="300px"></iframe>
+    </div>
+    <!-- 主体js -->
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;div class="circle"&gt;&lt;/div&gt;<br>
+                    &lt;svg&gt;<br>
+                    &lt;!-- 这里定义了一个名为gooey的滤镜，它包含两个滤镜操作：<br>
+                    1、feGaussianBlur：这个操作会对源图形应用高斯模糊效果，<br>
+                    stdDeviation属性设置了模糊的强度，数值越大，模糊效果越明显。<br>
+                    2、feColorMatrix：这个操作会对颜色进行矩阵变换，用于改变源图形的每个像素的颜色值。<br>
+                    在这个矩阵中，前三个通道（红、绿、蓝）的值被设置为1，这意味着颜色值不会改变。<br>
+                    第四行的最后两个值0 0 0 50 -10用于改变透明度通道，增加颜色的不透明度，并减小透明度，<br>
+                    从而创建一种颜色浓度和透明度的变化效果，给人一种粘稠的感觉。<br>
+                    当filter: url(#gooey);这行代码应用于一个元素时，它会将gooey滤镜的效果应用到该元素上，使得元素的边缘看起来模糊和透明，就像液体一样。<br>
+                    在这个例子中，滤镜被应用于整个页面，使得页面上所有的元素都呈现出这种粘稠的视觉效果。 --&gt;<br>
+                    &lt;filter id="gooey"&gt;<br>
+                    &lt;feGaussianBlur in="SourceGraphic" stdDeviation="5" /&gt;<br>
+                    &lt;feColorMatrix values="<br>
+                    1 0 0 0 0<br>
+                    0 1 0 0 0<br>
+                    0 0 1 0 0<br>
+                    0 0 0 50 -10" /&gt;<br>
+                    &lt;/filter&gt;<br>
+                    &lt;/svg&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    * {<br>
+                    margin: 0;<br>
+                    padding: 0;<br>
+                    box-sizing: border-box;<br>
+                    }<br>
+
+                    body {<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    min-height: 100vh;<br>
+                    background: #393c40;<br>
+                    overflow: hidden;<br>
+                    }<br>
+
+                    svg {<br>
+                    width: 0;<br>
+                    height: 0;<br>
+                    }<br>
+
+                    body {<br>
+                    /* 在CSS中，filter属性用于对元素应用图形效果，比如模糊、亮度、对比度等。<br>
+                    url()函数在filter属性中使用时，允许您引用一个定义在SVG &lt;filter&gt;元素中的滤镜效果。<br>
+                    在这个例子中，filter: url(#gooey);这行代码引用了一个ID为gooey的SVG滤镜。<br>
+                    这个滤镜是在HTML的&lt;svg&gt;元素中定义的*/<br>
+                    filter: url(#gooey);<br>
+                    }<br>
+
+                    .circle {<br>
+                    position: relative;<br>
+                    width: 100px;<br>
+                    height: 100px;<br>
+                    background: linear-gradient(90deg, rgb(123, 235, 236), rgb(255, 194, 239));<br>
+                    border-radius: 50%;<br>
+                    cursor: pointer;<br>
+                    }<br>
+
+                    .particles {<br>
+                    position: absolute;<br>
+                    border-radius: 50%;<br>
+                    background: linear-gradient(90deg, rgb(123, 235, 236), rgb(255, 194, 239));<br>
+                    z-index: -1;<br>
+                    }<br>
+
+                    @keyframes animate {<br>
+
+                    0%,<br>
+                    100% {<br>
+                    transform: translate(0, 0);<br>
+                    }<br>
+
+                    50% {<br>
+                    /* 引用随机坐标【--x，--y】 */<br>
+                    transform: translate(var(--x), var(--y));<br>
+                    }<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <div class="js">
+            <div class="lb-wz">js</div>
+            <div class="dm">
+                <p id="fz-js">
+                    let circle = document.querySelector('.circle'); <br>
+                    // 1. 选择类名为 'circle' 的元素<br>
+                    circle.addEventListener('click', function () { <br>
+                    // 2. 为这个元素添加点击事件监听器<br>
+                    for (let i = 0; i &lt; 50; i++) { <br>
+                    // 3. 执行一个循环，循环50次<br>
+                    let particles=document.createElement('i'); <br>
+                    //4.创建一个新的 'i' 元素，代表一个粒子 <br>
+                    particles.classList.add('particles'); <br>
+                    // 5. 为这个粒子元素添加 'particles' 类 <br>
+                    let randomX=(Math.random() - 0.5) * window.innerWidth;<br>
+                    // 6. 计算随机的 X 坐标<br>
+                    let randomY=(Math.random() - 0.5) * window.innerHeight;<br>
+                    // 7. 计算随机的 Y 坐标<br>
+                    particles.style.setProperty('--x', randomX + 'px' );<br>
+                    // 8. 设置 CSS 变量 '--x' ，用于动画的 X 移动<br>
+                    particles.style.setProperty('--y', randomY + 'px' );<br>
+                    // 9. 设置CSS 变量 '--y' ，用于动画的 Y 移动<br>
+                    let randonSize=Math.random() * 10 + 10;<br>
+                    // 10. 计算随机的粒子大小<br>
+                    particles.style.width=randonSize + 'px' ;<br>
+                    // 11. 设置粒子的宽度<br>
+                    particles.style.height=randonSize + 'px' ;<br>
+                    // 12. 设置粒子的高度 let duration=Math.random() * 3 + 2;<br>
+                    // 13. 计算随机的动画持续时间<br>
+                    particles.style.animation=`animate ${duration}s ease infinite`;<br>
+                    // 14. 设置动画属性<br>
+                    document.body.appendChild(particles);<br>
+                    // 15. 将粒子元素添加到 body 元素中<br>
+                    setTimeout(function () {<br>
+                    // 16.设置一个定时器<br>
+                    particles.remove();<br>
+                    // 17. 在定时器结束时移除粒子元素<br>
+                    }, 10000);<br>
+                    // 18. 定时器设置为 10000 毫秒（10秒） } });<br>
+                    // 1、选择元素：首先，通过document.querySelector选择类名为circle的元素，并将其存储在变量circle中。<br>
+                    // 2、添加事件监听器：为circle元素添加一个点击事件监听器。当这个元素被点击时，将执行一个匿名函数。<br>
+                    // 3、循环创建粒子：在函数内部，使用for循环来创建50个粒子。循环变量i从0开始，每次迭代增加1，直到达到50。<br>
+                    // 4、创建粒子元素：在每次循环中，创建一个新的i元素，这个元素将代表一个粒子。<br>
+                    // 5、添加类名：为新建的粒子元素添加particles类，这个类在CSS中定义了粒子的基本样式。<br>
+                    // 6、计算随机位置：计算一个随机的X坐标和Y坐标，用于粒子动画的起始位置。<br>
+                    Math.random()生成一个0到1之间的随机数，乘以窗口的宽度或高度，再减去0.5，以确保粒子可以在窗口内的任何位置出现。<br>
+                    // 7、设置CSS变量：使用style.setProperty方法为粒子元素设置CSS变量--x和--y，这些变量将在CSS动画中用于控制粒子的移动。<br>
+                    // 8、设置粒子大小：计算一个随机的粒子大小，并将其应用于粒子的宽度和高度。<br>
+                    // 9、设置动画属性：为粒子元素设置一个随机的动画持续时间，以及动画的关键帧名称animate。这样每个粒子都会有不同的动画持续时间和起始位置。<br>
+                    // 10、添加粒子到文档：将粒子元素添加到document.body中，使其在页面上可见。<br>
+                    // 11、设置定时器移除粒子：使用setTimeout设置一个定时器，当定时器结束时，移除对应的粒子元素。这样粒子在页面上只会存在一段时间，然后消失。<br>
+                    // 12、整个JavaScript部分的逻辑主要是监听点击事件，然后在事件发生时创建一系列的粒子元素，并给它们设置随机的位置、大小和动画。<br>
+                    这些粒子会在页面上移动一段时间后消失，从而创建一个动态的视觉效果。<br>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_js()">复制js</span>
+            </li>
+            <!-- <li class="menu-item">
+                    <i class="fa fa-solid fa-trash"></i>
+                    <span>删除</span>
+                </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>

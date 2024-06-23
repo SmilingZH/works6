@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transform: scale();
+        }
+
+        :root {
+            /* 骰子的大小 */
+            --cube-size: 20px;
+
+            /* 骰子内面的大小 */
+            --inner-size: calc(var(--cube-size) * 0.6);
+
+            /* 骰子的一半大小，用于生成骰子各个面的位置 */
+            --half-size: calc(var(--cube-size) / 2);
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #aae0e3;
+            font-family: "Zen Dots", sans-serif;
+            font-size: 16px;
+            font-weight: bold;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            width: 60vw;
+            height: 60vh;
+        }
+
+
+        .dice1,
+        .dice2,
+        .dice3 {
+            position: absolute;
+            width: var(--cube-size);
+            height: var(--cube-size);
+            transform-style: preserve-3d;
+            transform-origin: center;
+            animation: rotateDice 4s linear infinite, moveInfinity 7s linear infinite;
+        }
+
+        /* 初始情况下，骰子2和3隐藏，显示是通过脚本实现的 */
+        .dice2,
+        .dice3 {
+            opacity: 0;
+        }
+
+        .dice2 {
+            animation-delay: 1.4s;
+        }
+
+        .dice3 {
+            animation-delay: 2.9s;
+        }
+
+        .face {
+            position: absolute;
+            width: var(--cube-size);
+            height: var(--cube-size);
+            background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+            background-size: 400% 400%;
+            border: 1px solid #ccc;
+            border-radius: 30%;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 50px rgba(255, 255, 255, 0.4);
+            opacity: 0.8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: rainbow 5s linear infinite;
+            transition: filter 0.3s ease;
+        }
+
+        .face:hover {
+            opacity: 1.0;
+            filter: brightness(2);
+            color: #FFF;
+        }
+
+        .face::before {
+            content: '';
+            position: absolute;
+            width: var(--inner-size);
+            height: var(--inner-size);
+            border-radius: 30%;
+            background: #fff6;
+            box-shadow:
+                0 0 5px rgba(255, 255, 255, 0.8),
+                0 0 10px rgba(255, 255, 255, 0.6),
+                0 0 20px rgba(255, 255, 255, 0.4);
+            animation: sparkle 1.5s infinite ease-in-out;
+        }
+
+        .face1 {
+            transform: rotateY(0deg) translateZ(var(--half-size));
+        }
+
+        .face2 {
+            transform: rotateY(90deg) translateZ(var(--half-size));
+        }
+
+        .face3 {
+            transform: rotateY(180deg) translateZ(var(--half-size));
+        }
+
+        .face4 {
+            transform: rotateY(-90deg) translateZ(var(--half-size));
+        }
+
+        .face5 {
+            transform: rotateX(90deg) translateZ(var(--half-size));
+        }
+
+        .face6 {
+            transform: rotateX(-90deg) translateZ(var(--half-size));
+        }
+
+        /* 骰子的旋转动画 */
+        @keyframes rotateDice {
+            from {
+                transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+            }
+
+            to {
+                transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+            }
+        }
+
+        /* 骰子的移动动画，在容器内部各个中点构成的菱形路径上移动 */
+        @keyframes moveInfinity {
+            0% {
+                top: 50%;
+                left: 0;
+            }
+
+            25% {
+                top: 0;
+                left: 50%;
+            }
+
+            50% {
+                top: 50%;
+                left: 100%;
+            }
+
+            75% {
+                top: 100%;
+                left: 50%;
+            }
+
+            100% {
+                top: 50%;
+                left: 0;
+            }
+        }
+
+        /* 骰子的面部颜色变化动画，通过改变背景位置实现，背景是由6个颜色组成的渐变色 */
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* 光晕效果动画 */
+        @keyframes sparkle {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 容器 -->
+    <div class="container">
+        <!-- 骰子1 -->
+        <div class="dice1">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+        </div>
+        <!-- 骰子2 -->
+        <div class="dice2">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>     
+        </div>
+        <!-- 骰子3 -->
+        <div class="dice3">
+            <div class="face face1">1</div>
+            <div class="face face2">2</div>
+            <div class="face face3">3</div>
+            <div class="face face4">4</div>
+            <div class="face face5">5</div>
+            <div class="face face6">6</div>
+        </div>
+    </div>
+    <script>
+        // 随机生成动画时长，在2~10秒之间
+        const randomDuration = Math.random() * 2 + 8;
+        // 获取骰子1，并设置动画时长
+        document.querySelector(".dice1").style.animationDuration = `${randomDuration}s, 7s`;
+        // 获取骰子3，并设置动画时长
+        document.querySelector(".dice3").style.animationDuration = `${randomDuration - 1.5}s, 7s`;
+        // 在运行1.5秒后显示骰子2
+        setTimeout(() => {
+            document.querySelector('.dice2').style.opacity = 1;
+        }, 1500);
+        // 在运行3秒后显示骰子3
+        setTimeout(() => {
+            // 2
+            document.querySelector('.dice3').style.opacity = 1;
+        }, 3000);
+    </script>
+</body>
+
+</html>

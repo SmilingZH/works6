@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>练习八</title>
+    <!-- 全局样式 -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: monospace;
+            font-size: 16px;
+            /* border: 1px solid red; */
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: hsl(188, 100%, 90%);
+            /* overflow: hidden; */
+            flex-direction: column;
+        }
+
+        iframe {
+            position: relative;
+            top: 3vh;
+            border-radius: 20px;
+            box-shadow:
+                inset -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1),
+                2.5px 2.5px 7.5px rgba(0, 0, 0, 0.3),
+                -2.5px -2.5px 7.5px rgba(255, 255, 255, 0.1);
+        }
+    </style>
+    <!-- 主体样式 -->
+    <!-- 滑动条样式 -->
+    <link rel="stylesheet" href="../css/hdt.css">
+    <!-- 返回按钮样式 -->
+    <link rel="stylesheet" href="../css/fhan.css">
+    <!-- 代码区样式 -->
+    <link rel="stylesheet" href="../css/dmq.css">
+    <!-- 弹窗菜单样式 -->
+    <link rel="stylesheet" href="../css/tccd.css">
+</head>
+
+<body>
+    <div>
+        <iframe src="lx10.html" frameborder="0" width="400px" height="300px"></iframe>
+    </div>
+    <!-- 主体js -->
+    <!-- 返回按钮 -->
+    <div id="fh" class="anniu" style="margin-top: 60px;">返回上一级</div>
+
+    <!-- 代码区 -->
+    <div class="dmq">
+        <!-- html部分 -->
+        <div class="html">
+            <div class="lb-wz">html</div>
+            <div class="dm">
+                <p id="fz-html">
+                    &lt;!-- 容器 --&gt;<br>
+                    &lt;div class="container"&gt;<br>
+                    &lt;!-- 骰子1 --&gt;<br>
+                    &lt;div class="dice1"&gt;<br>
+                    &lt;div class="face face1"&gt;1&lt;/div&gt;<br>
+                    &lt;div class="face face2"&gt;2&lt;/div&gt;<br>
+                    &lt;div class="face face3"&gt;3&lt;/div&gt;<br>
+                    &lt;div class="face face4"&gt;4&lt;/div&gt;<br>
+                    &lt;div class="face face5"&gt;5&lt;/div&gt;<br>
+                    &lt;div class="face face6"&gt;6&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;!-- 骰子2 --&gt;<br>
+                    &lt;div class="dice2"&gt;<br>
+                    &lt;div class="face face1"&gt;1&lt;/div&gt;<br>
+                    &lt;div class="face face2"&gt;2&lt;/div&gt;<br>
+                    &lt;div class="face face3"&gt;3&lt;/div&gt;<br>
+                    &lt;div class="face face4"&gt;4&lt;/div&gt;<br>
+                    &lt;div class="face face5"&gt;5&lt;/div&gt;<br>
+                    &lt;div class="face face6"&gt;6&lt;/div&gt;<br>   
+                    &lt;/div&gt;<br>
+                    &lt;!-- 骰子3 --&gt;<br>
+                    &lt;div class="dice3"&gt;<br>
+                    &lt;div class="face face1"&gt;1&lt;/div&gt;<br>
+                    &lt;div class="face face2"&gt;2&lt;/div&gt;<br>
+                    &lt;div class="face face3"&gt;3&lt;/div&gt;<br>
+                    &lt;div class="face face4"&gt;4&lt;/div&gt;<br>
+                    &lt;div class="face face5"&gt;5&lt;/div&gt;<br>
+                    &lt;div class="face face6"&gt;6&lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                    &lt;/div&gt;<br>
+                </p>
+            </div>
+        </div>
+        <!-- css部分 -->
+        <div class="css">
+            <div class="lb-wz">css</div>
+            <div class="dm">
+                <p id="fz-css">
+                    * {<br>
+                    margin: 0;<br>
+                    padding: 0;<br>
+                    box-sizing: border-box;<br>
+                    transform: scale();<br>
+                    }<br>
+
+                    :root {<br>
+                    /* 骰子的大小 */<br>
+                    --cube-size: 20px;<br>
+
+                    /* 骰子内面的大小 */<br>
+                    --inner-size: calc(var(--cube-size) * 0.6);<br>
+
+                    /* 骰子的一半大小，用于生成骰子各个面的位置 */<br>
+                    --half-size: calc(var(--cube-size) / 2);<br>
+                    }<br>
+
+                    body {<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    min-height: 100vh;<br>
+                    background-color: #aae0e3;<br>
+                    font-family: "Zen Dots", sans-serif;<br>
+                    font-size: 16px;<br>
+                    font-weight: bold;<br>
+                    overflow: hidden;<br>
+                    }<br>
+
+                    .container {<br>
+                    position: relative;<br>
+                    width: 60vw;<br>
+                    height: 60vh;<br>
+                    }<br>
+
+
+                    .dice1,<br>
+                    .dice2,<br>
+                    .dice3 {<br>
+                    position: absolute;<br>
+                    width: var(--cube-size);<br>
+                    height: var(--cube-size);<br>
+                    transform-style: preserve-3d;<br>
+                    transform-origin: center;<br>
+                    animation: rotateDice 4s linear infinite, moveInfinity 7s linear infinite;<br>
+                    }<br>
+
+                    /* 初始情况下，骰子2和3隐藏，显示是通过脚本实现的 */<br>
+                    .dice2,<br>
+                    .dice3 {<br>
+                    opacity: 0;<br>
+                    }<br>
+
+                    .dice2 {<br>
+                    animation-delay: 1.4s;<br>
+                    }<br>
+
+                    .dice3 {<br>
+                    animation-delay: 2.9s;<br>
+                    }<br>
+
+                    .face {<br>
+                    position: absolute;<br>
+                    width: var(--cube-size);<br>
+                    height: var(--cube-size);<br>
+                    background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);<br>
+                    border: 1px solid #ccc;<br>
+                    border-radius: 30%;<br>
+                    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6), 0 0 50px rgba(255,
+                    255, 255, 0.4);<br>
+                    opacity: 0.8;<br>
+                    display: flex;<br>
+                    justify-content: center;<br>
+                    align-items: center;<br>
+                    animation: rainbow 5s linear infinite;<br>
+                    transition: filter 0.3s ease;<br>
+                    }<br>
+
+                    .face:hover {<br>
+                    opacity: 1.0;<br>
+                    filter: brightness(2);<br>
+                    color: #FFF;<br>
+                    }<br>
+
+                    .face::before {<br>
+                    content: '';<br>
+                    position: absolute;<br>
+                    width: var(--inner-size);<br>
+                    height: var(--inner-size);<br>
+                    border-radius: 30%;<br>
+                    background: #fff6;<br>
+                    box-shadow:<br>
+                    0 0 5px rgba(255, 255, 255, 0.8),<br>
+                    0 0 10px rgba(255, 255, 255, 0.6),<br>
+                    0 0 20px rgba(255, 255, 255, 0.4);<br>
+                    animation: sparkle 1.5s infinite ease-in-out;<br>
+                    }<br>
+
+                    .face1 {<br>
+                    transform: rotateY(0deg) translateZ(var(--half-size));<br>
+                    }<br>
+
+                    .face2 {<br>
+                    transform: rotateY(90deg) translateZ(var(--half-size));<br>
+                    }<br>
+
+                    .face3 {<br>
+                    transform: rotateY(180deg) translateZ(var(--half-size));<br>
+                    }<br>
+
+                    .face4 {<br>
+                    transform: rotateY(-90deg) translateZ(var(--half-size));<br>
+                    }<br>
+
+                    .face5 {<br>
+                    transform: rotateX(90deg) translateZ(var(--half-size));<br>
+                    }<br>
+
+                    .face6 {<br>
+                    transform: rotateX(-90deg) translateZ(var(--half-size));<br>
+                    }<br>
+
+                    /* 骰子的旋转动画 */<br>
+                    @keyframes rotateDice {<br>
+                    from {<br>
+                    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);<br>
+                    }<br>
+
+                    to {<br>
+                    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);<br>
+                    }<br>
+                    }<br>
+
+                    /* 骰子的移动动画，在容器内部各个中点构成的菱形路径上移动 */<br>
+                    @keyframes moveInfinity {<br>
+                    0% {<br>
+                    top: 50%;<br>
+                    left: 0;<br>
+                    }<br>
+
+                    25% {<br>
+                    top: 0;<br>
+                    left: 50%;<br>
+                    }<br>
+
+                    50% {<br>
+                    top: 50%;<br>
+                    left: 100%;<br>
+                    }<br>
+
+                    75% {<br>
+                    top: 100%;<br>
+                    left: 50%;<br>
+                    }<br>
+
+                    100% {<br>
+                    top: 50%;<br>
+                    left: 0;<br>
+                    }<br>
+                    }<br>
+
+                    /* 骰子的面部颜色变化动画，通过改变背景位置实现，背景是由6个颜色组成的渐变色 */<br>
+                    @keyframes rainbow {<br>
+                    0% {<br>
+                    background-position: 0% 50%;<br>
+                    }<br>
+
+                    50% {<br>
+                    background-position: 100% 50%;<br>
+                    }<br>
+
+                    100% {<br>
+                    background-position: 0% 50%;<br>
+                    }<br>
+                    }<br>
+
+                    /* 光晕效果动画 */<br>
+                    @keyframes sparkle {<br>
+
+                    0%,<br>
+                    100% {<br>
+                    opacity: 0;<br>
+                    }<br>
+
+                    50% {<br>
+                    opacity: 1;<br>
+                    }<br>
+                    }<br>
+                </p>
+            </div>
+        </div>
+        <!-- js部分 -->
+        <div class="js">
+            <div class="lb-wz">js</div>
+            <div class="dm">
+                <p id="fz-js">
+                    // 随机生成动画时长，在2~10秒之间<br>
+                    const randomDuration = Math.random() * 2 + 8;<br>
+                    // 获取骰子1，并设置动画时长<br>
+                    document.querySelector(".dice1").style.animationDuration = `${<br>
+                    randomDuration<br>
+                    }s, 7s`;<br>
+                    // 获取骰子3，并设置动画时长<br>
+                    document.querySelector(".dice3").style.animationDuration = `${<br>
+                    randomDuration - 1.5<br>
+                    }s, 7s`;<br>
+                    // 在运行1.5秒后显示骰子2<br>
+                    setTimeout(() => {<br>
+                    document.querySelector('.dice2').style.opacity = 1;<br>
+                    }, 1500);<br>
+                    // 在运行3秒后显示骰子3<br>
+                    setTimeout(() => {<br>
+                    // 2<br>
+                    document.querySelector('.dice3').style.opacity = 1;<br>
+                    }, 3000);<br>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- 弹窗菜单基本结构 -->
+    <div class="menu-box">
+        <div class="menu-button">
+            <div class="line-box">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item">
+                <span onclick="fz_html()">复制html</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_css()">复制css</span>
+            </li>
+            <li class="menu-item">
+                <span onclick="fz_js()">复制js</span>
+            </li>
+            <!-- <li class="menu-item">
+                    <i class="fa fa-solid fa-trash"></i>
+                    <span>删除</span>
+                </li> -->
+        </ul>
+    </div>
+    <!-- 引入复制按钮js部分 -->
+    <script src="../js/fzan.js"></script>
+    <!-- 引入返回按钮js部分 -->
+    <script src="../js/fhan.js"></script>
+</body>
+
+</html>
